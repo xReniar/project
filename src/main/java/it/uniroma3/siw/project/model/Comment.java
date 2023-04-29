@@ -1,7 +1,6 @@
 package it.uniroma3.siw.project.model;
 
 import jakarta.persistence.*;
-import it.uniroma3.siw.project.model.User;
 
 import java.util.List;
 
