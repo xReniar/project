@@ -2,7 +2,6 @@ package it.uniroma3.siw.project.model;
 
 import jakarta.persistence.*;
 import jakarta.persistence.ManyToOne;
-
 import java.util.List;
 
 @Entity
