@@ -2,9 +2,6 @@ package it.uniroma3.siw.project.model;
 
 import jakarta.persistence.*;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-import it.uniroma3.siw.project.model.User;
-import it.uniroma3.siw.project.model.Comment;
 
 import java.util.List;
 
