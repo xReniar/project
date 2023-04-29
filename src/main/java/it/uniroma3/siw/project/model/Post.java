@@ -2,6 +2,8 @@ package it.uniroma3.siw.project.model;
 
 import jakarta.persistence.*;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 @Entity
@@ -9,8 +11,10 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
     @ManyToOne
     private User author;
+    @NotBlank
     private String text;
     @OneToMany
     private List<User> likedUsers;
