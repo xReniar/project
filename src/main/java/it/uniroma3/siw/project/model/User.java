@@ -18,6 +18,8 @@ public class User {
     private String surname;
     @NotBlank
     private String username;
+    @NotBlank
+    private String email;
 
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
@@ -82,6 +84,14 @@ public class User {
 
     public void setUsersFollowers(List<User> usersFollowers) {
         this.usersFollowers = usersFollowers;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
