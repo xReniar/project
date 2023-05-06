@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <title>Document</title>
+</head>
+<body>
+<header>
+    <h1>REGISTER</h1>
+    <!--
+    <div th:if="${#request.userPrincipal}">
+        <span th:text="${#request.userPrincipal.principal.username}"></span>
+        <a href="/logout">Logout</a>            STA ROBA NON FUNZIONA NON SO PERCHè
+    </div>
+    <div th:unless="${#request.userPrincipal}">
+        <a href="/login">Login</a>
+    </div>-->
+
+    <form th:action="@{/register}" method="POST">
+        <div>
+            <label>Username</label>
+            <span>
+				<input type="text" placeholder="username" required th:field="${credentials.username}" />
+			</span>
+            <span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
+                  th:style="'color:red'">
+			</span>
+        </div>
+        <div>
+            <label>Password</label>
+            <span><input type="password" placeholder="password" required th:field="${credentials.password}" />
+			</span>
+            <span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}"
+                  th:style="'color:red'">
+			</span>
+        </div>
+        <div>
+            <label>Nome</label>
+            <span><input type="text" placeholder="name" required th:field="${user.name}" /></span>
+            <span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}" th:style="'color:red'">
+			</span>
+        </div>
+        <div>
+            <label>Cognome</label>
+            <span><input type="text" placeholder="surname" required th:field="${user.surname}" /></span>
+            <span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}" th:style="'color:red'">
+			</span>
+        </div>
+        <div>
+            <label>Email</label>
+            <span><input type="text" placeholder="email" required th:field="${user.email}" /></span>
+            <span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" th:style="'color:red'">
+			</span>
+        </div>
+        <div>
+            <button type="submit">Registra</button>
+        </div>
+    </form>
+
+</header>
+</body>
+</html>
