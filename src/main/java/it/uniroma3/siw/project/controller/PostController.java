@@ -10,4 +10,9 @@ public class PostController {
     public String index(){
         return "index.html";
     }
+
+    @GetMapping("/personalAccount")
+    public String personalAccountForm(){
+        return "personalAccount.html";
+    }
 }

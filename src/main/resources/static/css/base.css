@@ -1,9 +1,47 @@
 /* QUESTO CSS SARA' LA BASE DI TUTTE LE PAGINE, IMPLEMENTA COSE COME I FONT, IL COLORE DI BACKGROUND E ALTRE COSE COMUNI A TUTTE LE PAGINE*/
 
-html{
+html {
     font-family: "Al Tarikh";
 }
 
 body {
-    background-color: lightblue;
+    background-color: white;
+    margin: 0px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #24292e;
+    height: 50px;
+    padding: 0 10px;
+}
+
+.navbar-logo {
+    color: #fff;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+.navbar-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin: 0 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+}
+
+.navbar-icons a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }

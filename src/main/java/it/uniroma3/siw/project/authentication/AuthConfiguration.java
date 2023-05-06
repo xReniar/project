@@ -36,7 +36,7 @@ public class AuthConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                                .requestMatchers(HttpMethod.GET,"/", "/index", "/login", "/register", "/css/**", "/images/**", "favicon.ico").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/", "/index", "/login", "/register", "/personalAccount","/css/**", "/images/**", "favicon.ico").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
                                 .requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
