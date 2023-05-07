@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PostController {
 
-    @GetMapping(value={"/","index.html"})
+   /* @GetMapping(value={"/","index.html"})
     public String index(){
         return "index.html";
-    }
+    } */
 
     @GetMapping("/personalAccount")
     public String personalAccountForm(){
