@@ -21,6 +21,9 @@ public class User {
     @NotBlank
     private String email;
 
+    @OneToOne
+    private Photo profilePicture;
+
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
 
@@ -92,6 +95,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Photo getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Photo profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     @Override
