@@ -16,6 +16,10 @@ public class Post {
     private User author;
     @NotBlank
     private String text;
+
+    @OneToMany
+    private List<Photo> images;
+
     @OneToMany
     private List<User> likedUsers;
     @OneToMany
@@ -60,6 +64,4 @@ public class Post {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-
-
 }
