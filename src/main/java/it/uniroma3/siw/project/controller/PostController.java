@@ -20,10 +20,10 @@ public class PostController {
     @Autowired
     PostRepository postRepository;
 
-    @GetMapping(value={"/","index.html"})
+   /* @GetMapping(value={"/","index.html"})
     public String index(){
         return "index.html";
-    }
+    } */
 
     /*@GetMapping("/personalAccount")
     public String personalAccountForm(){
