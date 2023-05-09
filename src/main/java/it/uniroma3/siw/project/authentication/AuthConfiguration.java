@@ -45,9 +45,9 @@ public class AuthConfiguration {
                 .authorizeHttpRequests((requests) -> {
                             try {
                                 requests
-                                                .requestMatchers(HttpMethod.GET, "/login", "/register", "/personalAccount","/css/**", "/images/**", "favicon.ico").permitAll()
-                                                .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                                                .anyRequest().authenticated()
+                                        .requestMatchers(HttpMethod.GET, "/login", "/register", "/personalAccount","/css/**", "/images/**", "favicon.ico").permitAll()
+                                        .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                                        .anyRequest().authenticated()
                                                 .and().exceptionHandling().accessDeniedPage("/error");
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
