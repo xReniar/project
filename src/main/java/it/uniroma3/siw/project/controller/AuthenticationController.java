@@ -66,7 +66,7 @@ public class AuthenticationController {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
-            return "registerSuccessful.html";
+            return "loginPage.html";
         }
         return "userRegisterPage.html";
     }
