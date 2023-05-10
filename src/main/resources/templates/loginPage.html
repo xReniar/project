@@ -10,9 +10,29 @@
     <title>Title</title>
 </head>
 <body>
+<h1>LOGIN</h1>
+<form th:action="@{/login}" method="post">
+    <div>
+        <span>Username:</span>
+        <span><input name="username" type="text" required /></span>
+    </div>
+    <div>
+        <span>Password:</span>
+        <span><input name="password" type="password" required /></span>
+    </div>
+    <div>
+        <span th:if="${param.error != null}">Username o password errati</span>
+    </div>
+    <div>
+        <span><button type="submit">Login</button></span>
+    </div>
 
-
-<form class="form_container">
+    <div>
+        <a th:href="@{/register}" th:text="Registrati">Registrati</a>
+    </div>
+</form>
+    <!--
+    <form class="form_container">
     <div class="logo_container"></div>
     <div class="title_container">
         <p class="title">Login to your Account</p>
@@ -72,5 +92,6 @@
     </button>
     <p class="note">Terms of use &amp; Conditions</p>
 </form>
+    -->
 </body>
 </html>

@@ -22,7 +22,7 @@ public class User {
     private String email;
 
     @OneToOne
-    private Photo profilePicture;
+    private Picture profilePicture;
 
     @OneToMany(mappedBy = "author")
     private List<Post> posts;
@@ -97,11 +97,11 @@ public class User {
         this.email = email;
     }
 
-    public Photo getProfilePicture() {
+    public Picture getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Photo profilePicture) {
+    public void setProfilePicture(Picture profilePicture) {
         this.profilePicture = profilePicture;
     }
 

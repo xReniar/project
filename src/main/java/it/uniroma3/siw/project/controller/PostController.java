@@ -30,10 +30,15 @@ public class PostController {
         return "personalAccount.html";
     }
     */
-    @GetMapping("/uploadImage")
-    public String getUploadImageForm(Model model){
+    @GetMapping("/formNewPost")
+    public String newPost(Model model){
         model.addAttribute("post",new Post());
         return "uploadImageForm.html";
+    }
+
+    @PostMapping("/uploadPost")
+    public String uploadPost(Model model){
+        return "";
     }
 
 }

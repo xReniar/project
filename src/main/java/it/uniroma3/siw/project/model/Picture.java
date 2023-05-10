@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
-public class Photo {
+public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -36,7 +36,7 @@ public class Photo {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Photo photo = (Photo) o;
+        Picture photo = (Picture) o;
         return Objects.equals(id, photo.id) && Arrays.equals(bytes, photo.bytes);
     }
 
