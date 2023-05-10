@@ -1,0 +1,14 @@
+body{
+    /* background: linear-gradient(#a0defda0,#3d1053a0); */
+    height:100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-container{
+    background-color: rgba(255,255,255, 0.7);
+    width: 70vw;
+    height: 100vh;
+}

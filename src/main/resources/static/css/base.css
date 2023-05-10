@@ -1,11 +1,5 @@
 /* QUESTO CSS SARA' LA BASE DI TUTTE LE PAGINE, IMPLEMENTA COSE COME I FONT, IL COLORE DI BACKGROUND E ALTRE COSE COMUNI A TUTTE LE PAGINE*/
-
-html {
-    font-family: "Al Tarikh";
-}
-
 body {
-    background-color: white;
     margin: 0px;
 }
 
