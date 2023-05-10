@@ -17,8 +17,8 @@ public class Post {
     @NotBlank
     private String text;
 
-    @OneToMany
-    private List<Picture> pictures;
+    @ManyToMany
+    private List<Image> pictures;
 
     @OneToMany
     private List<User> likedUsers;
@@ -65,11 +65,11 @@ public class Post {
         this.comments = comments;
     }
 
-    public List<Picture> getPictures() {
+    public List<Image> getPictures() {
         return pictures;
     }
 
-    public void setPictures(List<Picture> pictures) {
+    public void setPictures(List<Image> pictures) {
         this.pictures = pictures;
     }
 }
