@@ -1,14 +1,28 @@
 body{
+    overscroll-behavior-y: none;
+    box-sizing: border-box;
     /* background: linear-gradient(#a0defda0,#3d1053a0); */
     height:100%;
+    width: 100vw;
     margin: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(rgb(173, 220, 250), rgb(99, 93, 142));
+    padding-bottom: 3rem;
 }
 
 .center-container{
-    background-color: rgba(255,255,255, 0.7);
-    width: 70vw;
-    height: 100vh;
+    background-color: rgba(255,255,255, 0.3);
+    width: 65%;
+    height: 100%;
+    padding: 4rem;
+    border-radius: 16px;
+    border: 1px solid #323232;
+}
+
+#title-project{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 2rem;
 }
