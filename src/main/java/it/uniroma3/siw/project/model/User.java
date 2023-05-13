@@ -17,8 +17,6 @@ public class User {
     @NotBlank
     private String surname;
     @NotBlank
-    private String username;
-    @NotBlank
     private String email;
 
     @OneToOne
@@ -55,14 +53,6 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public List<Post> getPosts() {
@@ -110,11 +100,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(username, user.username) && Objects.equals(posts, user.posts) && Objects.equals(usersFollowing, user.usersFollowing) && Objects.equals(usersFollowers, user.usersFollowers);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(posts, user.posts) && Objects.equals(usersFollowing, user.usersFollowing) && Objects.equals(usersFollowers, user.usersFollowers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, username);
+        return Objects.hash(id, name, surname);
     }
 }
