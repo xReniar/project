@@ -2,7 +2,7 @@ package it.uniroma3.siw.project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Comment {
@@ -16,7 +16,7 @@ public class Comment {
     private User author;
     @NotBlank
     @OneToMany
-    private List<User> likedUsers;
+    private Set<User> likedUsers;
 
     public Long getId() {
         return id;
@@ -42,11 +42,11 @@ public class Comment {
         this.author = author;
     }
 
-    public List<User> getLikedUsers() {
+    public Set<User> getLikedUsers() {
         return likedUsers;
     }
 
-    public void setLikedUsers(List<User> likedUsers) {
+    public void setLikedUsers(Set<User> likedUsers) {
         this.likedUsers = likedUsers;
     }
 }
