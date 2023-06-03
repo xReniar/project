@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class Credentials {
 
-    public static final String DEFAULT_ROLE = "DEFAULT";
-    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String LOGGED_ROLE = "AUTHENTICATED";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
