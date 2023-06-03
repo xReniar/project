@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -17,13 +17,13 @@ public class Post {
     @NotBlank
     private String text;
 
-    @ManyToMany
-    private List<Image> pictures;
+    @OneToMany
+    private Set<Image> pictures;
 
     @OneToMany
-    private List<User> likedUsers;
+    private Set<User> likedUsers;
     @OneToMany
-    private List<Comment> comments;
+    private Set<Comment> comments;
 
     public Long getId() {
         return id;
@@ -49,27 +49,27 @@ public class Post {
         this.text = text;
     }
 
-    public List<User> getLikedUsers() {
+    public Set<User> getLikedUsers() {
         return likedUsers;
     }
 
-    public void setLikedUsers(List<User> likedUsers) {
+    public void setLikedUsers(Set<User> likedUsers) {
         this.likedUsers = likedUsers;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<Image> getPictures() {
+    public Set<Image> getPictures() {
         return pictures;
     }
 
-    public void setPictures(List<Image> pictures) {
+    public void setPictures(Set<Image> pictures) {
         this.pictures = pictures;
     }
 }
