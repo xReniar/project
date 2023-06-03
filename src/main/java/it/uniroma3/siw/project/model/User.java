@@ -3,8 +3,8 @@ package it.uniroma3.siw.project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -23,13 +23,13 @@ public class User {
     private Image profilePicture;
 
     @OneToMany(mappedBy = "author")
-    private List<Post> posts;
+    private Set<Post> posts;
 
     @OneToMany
-    private List<User> usersFollowing;
+    private Set<User> usersFollowing;
 
     @OneToMany
-    private List<User> usersFollowers;
+    private Set<User> usersFollowers;
 
     public Long getId() {
         return id;
@@ -55,27 +55,27 @@ public class User {
         this.surname = surname;
     }
 
-    public List<Post> getPosts() {
+    public Set<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
 
-    public List<User> getUsersFollowing() {
+    public Set<User> getUsersFollowing() {
         return usersFollowing;
     }
 
-    public void setUsersFollowing(List<User> usersFollowing) {
+    public void setUsersFollowing(Set<User> usersFollowing) {
         this.usersFollowing = usersFollowing;
     }
 
-    public List<User> getUsersFollowers() {
+    public Set<User> getUsersFollowers() {
         return usersFollowers;
     }
 
-    public void setUsersFollowers(List<User> usersFollowers) {
+    public void setUsersFollowers(Set<User> usersFollowers) {
         this.usersFollowers = usersFollowers;
     }
 
