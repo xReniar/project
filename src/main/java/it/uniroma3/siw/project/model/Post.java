@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     @ManyToOne
@@ -20,9 +20,9 @@ public class Post {
     @OneToMany
     private Set<Image> pictures;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> likedUsers;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
     public Long getId() {
