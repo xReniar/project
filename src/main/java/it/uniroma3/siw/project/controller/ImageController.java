@@ -1,6 +1,8 @@
 package it.uniroma3.siw.project.controller;
 
+import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.repository.ImageRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ public class ImageController {
     public ResponseEntity<byte[]> displayItemImage(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(this.imageRepository.findById(id).get().getBytes(), headers, HttpStatus.OK);
+        Image img = this.imageRepository.findById(id).get();
+        return new ResponseEntity<>(img.getBytes(), headers, HttpStatus.OK);
     }
 }
