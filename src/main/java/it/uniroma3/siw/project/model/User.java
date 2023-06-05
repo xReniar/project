@@ -22,13 +22,13 @@ public class User {
     @OneToOne
     private Image profilePicture;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
     private Set<Post> posts;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> usersFollowing;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> usersFollowers;
 
     public Long getId() {
