@@ -1,14 +1,23 @@
-body{
-    /* background: linear-gradient(#a0defda0,#3d1053a0); */
-    height:100%;
+* {
+    padding: 0;
     margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.center-container{
-    background-color: rgba(255,255,255, 0.7);
-    width: 70vw;
+.content {
+    display: flex;
+}
+
+.sidebar-container {
+    width: 25%;
     height: 100vh;
+    position:fixed;
+    background: red;
+}
+
+.posts-container {
+    width: 75%;
+    margin-left: 25%;
+    background: blue;
 }
