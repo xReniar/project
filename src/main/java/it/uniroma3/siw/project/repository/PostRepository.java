@@ -5,4 +5,5 @@ import it.uniroma3.siw.project.model.Post;
 
 public interface PostRepository extends CrudRepository<Post,Long> {
     /*public boolean existsByTitleAndContent(String title,String content);*/
+    //public List<Post> findAllByOrderByText();
 }
