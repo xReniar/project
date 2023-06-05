@@ -12,10 +12,10 @@ public class Comment {
     @NotBlank
     private String text;
     @NotBlank
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User author;
     @NotBlank
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private Set<User> likedUsers;
 
     public Long getId() {
