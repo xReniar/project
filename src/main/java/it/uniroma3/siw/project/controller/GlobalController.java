@@ -28,7 +28,7 @@ public class GlobalController {
         return user;
     }
 
-    public User getAuthor(){
+    public User getCurrentUser(){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Credentials credential = this.credentialsRepository.findByUsername(username).get();
         return credential.getUser();
