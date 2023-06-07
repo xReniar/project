@@ -33,4 +33,15 @@ public class GlobalController {
         Credentials credential = this.credentialsRepository.findByUsername(username).get();
         return credential.getUser();
     }
+
+    @ModelAttribute("user_NameSurname")
+    public String getUser_NameSurname(){
+        try {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = this.credentialsRepository.findByUsername(username).get().getUser();
+            return user.getName() + " " + user.getSurname();
+        } catch(Exception e){
+            return "";
+        }
+    }
 }
