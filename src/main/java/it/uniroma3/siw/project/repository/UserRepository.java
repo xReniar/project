@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import it.uniroma3.siw.project.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
-    
+    public boolean existsByEmail(String email);
 }
