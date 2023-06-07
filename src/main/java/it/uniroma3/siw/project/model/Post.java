@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -11,7 +12,6 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
     @ManyToOne
     private User author;
     @NotBlank
@@ -71,5 +71,18 @@ public class Post {
 
     public void setPictures(Set<Image> pictures) {
         this.pictures = pictures;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(author, post.author) && Objects.equals(text, post.text) && Objects.equals(pictures, post.pictures) && Objects.equals(likedUsers, post.likedUsers) && Objects.equals(comments, post.comments);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(author, text, pictures, likedUsers, comments);
     }
 }
