@@ -29,10 +29,12 @@ public class CommentController {
     public String newPostComment(Model model,@Valid @ModelAttribute("comment") Comment comment,BindingResult bindingResult,
                                  @PathVariable("postId") Long postId){
         Post post = this.postRepository.findById(postId).get();
-        comment.setAuthor(this.globalController.getAuthor());
-        post.getComments().add(comment);
-        this.commentRepository.save(comment);
-        this.postRepository.save(post);
+        comment.setAuthor(this.globalController.getCurrentUser());
+        if(!this.postRepository.hasCommentWithAuthor(post,this.globalController.getCurrentUser())){
+            post.getComments().add(comment);
+            this.commentRepository.save(comment);
+            this.postRepository.save(post);
+        }
         return "";
     }
 }
