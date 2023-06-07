@@ -1,41 +1,71 @@
-/* QUESTO CSS SARA' LA BASE DI TUTTE LE PAGINE, IMPLEMENTA COSE COME I FONT, IL COLORE DI BACKGROUND E ALTRE COSE COMUNI A TUTTE LE PAGINE*/
-body {
-    margin: 0px;
+:root {
+    --color-white: hsl(252,30%,100%);
+    --color-light: hsl(252,30%,95%);
+    --color-gray: hsl(252,15%,65%);
+    --color-primary: hsl(252,75%,60%);
+    --color-secondary: hsl(252,100%,90%);
+    --color-success: hsl(120,95%,65%);
+    --color-danger: hsl(0,95%,65%);
+    --color-dark: hsl(252,30%,17%);
+    --color-black: hsl(252,30%,10%);
+
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 2rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+
+    --sticky-top: 5.4rem;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #24292e;
-    height: 50px;
-    padding: 0 10px;
-}
-
-.navbar-logo {
-    color: #fff;
-    font-size: 28px;
+*, *::before, *::after {
+    margin:0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
     text-decoration: none;
+    list-style: none;
+    border: none;
 }
 
-.navbar-icons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+a:visited {
+    color: inherit;
 }
 
-.navbar-icons a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    margin: 0 10px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    transition: all 0.2s ease-in-out;
+body {
+    color: var(--color-dark);
+    background: var(--color-light);
+    overflow-x: hidden;
 }
 
-.navbar-icons a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: var(--btn-padding);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 300ms ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color:white;
+}
+
+.text.bold {
+    font-weight: 500;
+}
+
+.text-muted {
+    color:var(--color-gray);
 }

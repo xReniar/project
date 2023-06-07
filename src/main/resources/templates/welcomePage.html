@@ -6,10 +6,27 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Project</title>
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+        <link rel="stylesheet" href="/css/base.css">
+        <link rel="stylesheet" href="/css/welcomePage.css">
     </head>
     <body>
-        <h1>Welcome Page</h1>
-        <a href="login">Login</a>
-        <a href="register">Register</a>
+        <nav>
+            <div class="container">
+                <h2 class="log">
+                    twitther
+                </h2>
+                <div th:if="${userDetails}" class="nav-utilities">
+                    <label class="btn btn-primary" for="login-logout">
+                        <a href="/logout">Logout</a>
+                    </label>
+                </div>
+                <div th:unless="${userDetails}">
+                    <label class="btn btn-primary" for="login-logout">
+                        <a href="/login">Login</a>
+                    </label>
+                </div>
+            </div>
+        </nav>
     </body>
 </html>
