@@ -1,85 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/account.css">
-    <title>Title</title>
-</head>
-
-<body>
-    <div class="hero">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+        <link rel="stylesheet" href="/css/base.css">
+        <link rel="stylesheet" href="/css/personalAccount.css">
+        <title>Title</title>
+    </head>
+    <body>
         <nav>
-            <img src="/images/logo.png" class="logo">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Notifications</a></li>
-            </ul>
-            <img src="/images/profile.png" class="user-pic" onclick="toggleMenu()">
-
-            <div class="sub-menu-wrap" id="subMenu">
-                <div class="sub-menu">
-                    <div class="user-info">
-                        <img src="/images/profile.png">
-                        <h2>User Name</h2>
-                    </div>
-                    <hr>
-
-                    <a href="#" class="sub-menu-link">
-                        <img src="/images/profile.png">
-                        <p>Edit Profile</p>
-                        <span></span>
-                    </a>
-                    <a href="#" class="sub-menu-link">
-                        <img src="/images/setting.png">
-                        <p>Settings</p>
-                        <span></span>
-                    </a>
-                    <a href="#" class="sub-menu-link">
-                        <img src="/images/logout.png">
-                        <p>Logout</p>
-                        <span></span>
-                    </a>
+            <div class="container">
+                <h2 class="log">
+                    twitther
+                </h2>
+                <div class="search-bar">
+                    <i class="uil uil-search"></i>
+                    <input type="search" placeholder="Search for friends">
+                </div>
+                <div th:if="${userDetails}" class="nav-utilities">
+                    <label class="btn btn-primary" for="login-logout">
+                        <a href="/logout">Logout</a>
+                    </label>
+                </div>
+                <div th:unless="${userDetails}">
+                    <label class="btn btn-primary" for="login-logout">
+                        <a href="/login">Login</a>
+                    </label>
                 </div>
             </div>
         </nav>
-    </div>
-
-    <script>
-        let subMenu = document.getElementById("subMenu");
-
-        function toggleMenu(){
-            subMenu.classList.toggle("open-menu");
-        }
-    </script>
-
-    <!--
-    <nav class="navbar">
-        <a href="#" class="navbar-logo"><i class="fas fa-code"></i></a>
-        <div class="navbar-icons">
-            <a href="#"><i class="fas fa-home"></i></a>
-            <a href="#"><i class="fas fa-envelope"></i></a>
-            <a href="#"><i class="fas fa-bell"></i></a>
-            <a href="#account"><i class="fas fa-user"></i></a>
-        </div>
-    </nav>
-
-    <div id="main_info">
-        <div id="profile_picture">
-
-        </div>
-        <div id="profile_info">
-
-        </div>
-    </div>
-    <div id="account_info">
-
-    </div>
-    -->
-</body>
-
+        <main>
+            <div class="container">
+                <!--================================== LEFT ==================================-->
+                <div class="left">
+                    <div class="sidebar">
+                        <a href="/index" class="menu-item">
+                            <span><i class="uil uil-home"></i></span>
+                            <h3>Home</h3>
+                        </a>
+                        <a class="menu-item">
+                            <span><i class="uil uil-compass"></i></span>
+                            <h3>Explore</h3>
+                        </a>
+                        <a class="menu-item">
+                            <span><i class="uil uil-user"></i></span> 
+                            <h3>Users</h3>
+                        </a>
+                        <a href="/user/settings" class="menu-item">
+                            <span><i class="uil uil-setting"></i></span> 
+                            <h3>Settings</h3>
+                        </a>
+                    </div>
+                    <label for="create-post" class="btn btn-primary">Create Post</label>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
