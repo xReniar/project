@@ -1,5 +1,7 @@
 package it.uniroma3.siw.project.controller;
 
+import it.uniroma3.siw.project.controller.validator.CredentialsValidator;
+import it.uniroma3.siw.project.controller.validator.UserValidator;
 import it.uniroma3.siw.project.model.Credentials;
 import it.uniroma3.siw.project.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,13 @@ import it.uniroma3.siw.project.service.CredentialsService;
 public class AuthenticationController {
 
     @Autowired
-    private CredentialsService credentialsService;
+    CredentialsService credentialsService;
+
+    @Autowired
+    UserValidator userValidator;
+
+    @Autowired
+    CredentialsValidator credentialsValidator;
 
     @Autowired
     GlobalController globalController;
@@ -41,6 +49,8 @@ public class AuthenticationController {
                                @ModelAttribute("credentials") Credentials credentials,
                                BindingResult credentialsBindingResult,
                                Model model) {
+        this.userValidator.validate(user, userBindingResult);
+        this.credentialsValidator.validate(credentials, credentialsBindingResult);
         // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
@@ -56,7 +66,7 @@ public class AuthenticationController {
         return "loginPage.html";
     }
 
-    @GetMapping(value = "/success")
+    @GetMapping(value = {"/success","/index"})
     public String defaultAfterLogin(Model model) {
         return "index.html";
     }
