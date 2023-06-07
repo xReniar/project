@@ -50,7 +50,7 @@ public class AuthConfiguration {
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/success")
                         .permitAll()
                 )
                 .logout((logout) -> logout
