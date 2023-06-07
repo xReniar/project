@@ -34,7 +34,7 @@ public class AuthConfiguration {
                 .authorizeHttpRequests((requests) -> {
                             try {
                                 requests
-                                        .requestMatchers(HttpMethod.GET, "/login", "/register","/","/index",
+                                        .requestMatchers(HttpMethod.GET, "/login", "/register","/",
                                                                          "/css/**", "/images/**", "favicon.ico").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                                         .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority(LOGGED_ROLE)
@@ -45,7 +45,7 @@ public class AuthConfiguration {
                                 throw new RuntimeException(e);
                             }
                         }
-                        // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
+                        // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /user/**
 
                 )
                 .formLogin((form) -> form
