@@ -24,7 +24,7 @@ public class AuthenticationController {
     GlobalController globalController;
 
     @GetMapping(value = "/")
-    public String index(Model model) {
+    public String welcomePage(Model model) {
         return "welcomePage.html";
     }
 
@@ -58,11 +58,6 @@ public class AuthenticationController {
 
     @GetMapping(value = "/success")
     public String defaultAfterLogin(Model model) {
-        return "index.html";
-    }
-
-    @GetMapping("/index")
-    public String index(){
         return "index.html";
     }
 }
