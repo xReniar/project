@@ -57,7 +57,7 @@ public class PostController {
             }
             post.setPictures(postImgs);
 
-            User author = this.globalController.getAuthor();
+            User author = this.globalController.getCurrentUser();
             // setting up the author of the post and adding the post to the list of user's posts       
             post.setAuthor(author);
             author.getPosts().add(post);
