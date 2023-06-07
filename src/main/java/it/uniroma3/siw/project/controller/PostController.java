@@ -2,8 +2,10 @@ package it.uniroma3.siw.project.controller;
 
 import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.Post;
+import it.uniroma3.siw.project.model.User;
 import it.uniroma3.siw.project.repository.ImageRepository;
 import it.uniroma3.siw.project.repository.PostRepository;
+import it.uniroma3.siw.project.repository.UserRepository;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
@@ -26,6 +28,9 @@ public class PostController {
     PostRepository postRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     ImageRepository imageRepository;
 
     @Autowired
@@ -40,6 +45,7 @@ public class PostController {
     @PostMapping("/user/uploadPost")
     public String uploadPost(Model model,@Valid @ModelAttribute("post") Post post,BindingResult bindingResult,
                              @RequestParam("files") MultipartFile[] images) throws IOException{
+        
         if(!bindingResult.hasErrors()){
 
             // setting up the images of the post
@@ -51,8 +57,12 @@ public class PostController {
             }
             post.setPictures(postImgs);
 
-            // setting up the author of the post            
-            post.setAuthor(this.globalController.getAuthor());
+            User author = this.globalController.getAuthor();
+            // setting up the author of the post and adding the post to the list of user's posts       
+            post.setAuthor(author);
+            author.getPosts().add(post);
+
+            this.userRepository.save(author);
             this.postRepository.save(post);
         }
         return "post.html";
