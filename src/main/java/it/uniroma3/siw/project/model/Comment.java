@@ -9,12 +9,13 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank
-    private String text;
-    @NotBlank
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User author;
+    
     @NotBlank
+    private String text;
+
     @OneToMany(fetch = FetchType.LAZY)
     private Set<User> likedUsers;
 
