@@ -17,8 +17,8 @@ public class Post {
     @NotBlank
     private String text;
 
-    @OneToMany
-    private Set<Image> pictures;
+    @OneToOne
+    private Image picture;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<User> likedUsers;
@@ -65,12 +65,12 @@ public class Post {
         this.comments = comments;
     }
 
-    public Set<Image> getPictures() {
-        return pictures;
+    public Image getPicture() {
+        return picture;
     }
 
-    public void setPictures(Set<Image> pictures) {
-        this.pictures = pictures;
+    public void setPicture(Image picture) {
+        this.picture = picture;
     }
 
     @Override
@@ -78,11 +78,11 @@ public class Post {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return Objects.equals(author, post.author) && Objects.equals(text, post.text) && Objects.equals(pictures, post.pictures) && Objects.equals(likedUsers, post.likedUsers) && Objects.equals(comments, post.comments);
+        return Objects.equals(author, post.author) && Objects.equals(text, post.text) && Objects.equals(picture, post.picture) && Objects.equals(likedUsers, post.likedUsers) && Objects.equals(comments, post.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(author, text, pictures, likedUsers, comments);
+        return Objects.hash(author, text, picture, likedUsers, comments);
     }
 }
