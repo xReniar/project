@@ -45,8 +45,8 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") User user,
-                               BindingResult userBindingResult, @Valid
-                               @ModelAttribute("credentials") Credentials credentials,
+                               BindingResult userBindingResult,
+                               @Valid @ModelAttribute("credentials") Credentials credentials,
                                BindingResult credentialsBindingResult,
                                Model model) {
         this.userValidator.validate(user, userBindingResult);
@@ -55,10 +55,9 @@ public class AuthenticationController {
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
             return "loginPage.html";
         }
-        return "registerPage.html";
+        return showRegisterForm(model);
     }
 
     @GetMapping(value = "/login")
