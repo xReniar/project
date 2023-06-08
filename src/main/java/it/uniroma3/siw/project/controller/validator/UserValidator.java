@@ -21,7 +21,7 @@ public class UserValidator implements Validator{
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        if(user.getEmail() != null && !this.userRepository.existsByEmail(user.getEmail())){
+        if(user.getEmail() != null && this.userRepository.existsByEmail(user.getEmail())){
             errors.reject("user.duplicate");
         }
     }
