@@ -1,5 +1,6 @@
 package it.uniroma3.siw.project.controller;
 
+import it.uniroma3.siw.project.controller.validator.PostValidator;
 import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.Post;
 import it.uniroma3.siw.project.model.User;
@@ -36,26 +37,25 @@ public class PostController {
     @Autowired
     GlobalController globalController;
 
+    @Autowired
+    PostValidator postValidator;
+
     @GetMapping("/user/formNewPost")
     public String newPost(Model model){
         model.addAttribute("post",new Post());
-        return "uploadImageForm.html";
+        return "formNewPost.html";
     }
 
     @PostMapping("/user/uploadPost")
     public String uploadPost(Model model,@Valid @ModelAttribute("post") Post post,BindingResult bindingResult,
-                             @RequestParam("files") MultipartFile[] images) throws IOException{
+                             @RequestParam("file") MultipartFile image) throws IOException {
         
+        this.postValidator.validate(post,bindingResult);
         if(!bindingResult.hasErrors()){
-
             // setting up the images of the post
-            Set<Image> postImgs = new TreeSet<>();
-            for(MultipartFile image : images){
-                Image img = new Image(image.getBytes());
-                this.imageRepository.save(img);
-                postImgs.add(img);
-            }
-            post.setPictures(postImgs);
+            Image img = new Image(image.getBytes());
+            this.imageRepository.save(img);
+            post.setPicture(img);
 
             User author = this.globalController.getCurrentUser();
             // setting up the author of the post and adding the post to the list of user's posts       
