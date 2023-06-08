@@ -2,15 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/formPost.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 </head>
 <body>
-    <h>Nuovo Post</h>
-    <div th:action="@{/uploadPost}" method="post" enctype="multipart/form-data" th:object="${post}">
-        <div>
-            <label></label>
+    <nav>
+        <div class="container">
+            <h2 class="log">
+                twitther
+            </h2>
+            <div class="search-bar">
+                <i class="uil uil-search"></i>
+                <input type="search" placeholder="Search for friends">
+            </div>
+            <div th:if="${userDetails}" class="nav-utilities">
+                <a href="/logout">
+                    <label class="btn btn-primary" for="login-logout">Logout</label>
+                </a>
+            </div>
+            <div th:unless="${userDetails}">
+                <a href="/login">
+                    <label class="btn btn-primary" for="login-logout">Login</label>
+                </a>
+            </div>
         </div>
+    </nav>
 
-    </div>
+    <main>
+        <div class="container">
+            <!--================================== LEFT ==================================-->
+            <div class="left">
+                <div class="sidebar">
+                    <a href="/index" class="menu-item">
+                        <span><i class="uil uil-home"></i></span>
+                        <h3>Home</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-compass"></i></span>
+                        <h3>Explore</h3>
+                    </a>
+                    <a href="/user/analytics" class="menu-item">
+                        <span><i class="uil uil-graph-bar"></i></span> 
+                        <h3>Analytics</h3>
+                    </a>
+                    <a href="/user/settings" class="menu-item">
+                        <span><i class="uil uil-user"></i></span> 
+                        <h3>Account</h3>
+                    </a>
+                </div>
+                <a href="/user/formNewPost" class="menu-item">
+                    <label for="create-post" class="btn btn-primary">Create Post</label>
+                </a>
+            </div>
+            <div class="post">
+                <form th:action="@{/user/uploadPost}" th:object="${post}" method="post" enctype="multipart/form-data" class="form">
+                    <div class="image-form">
+                        <input required type="file" name="file">
+                    </div>
+                    <div class="text-form">
+                        <input required type="text" autocomplete="off" th:field="${post.text}" placeholder="Write a caption...">
+                    </div>
+                    <button type="submit" class="button">Share post</button>
+                </form>
+            </div>
+            <div class="right">
+                <div class="sidebar">
+                    <a class="profile">
+                        <div class="profile-photo">
+                            <img src="">
+                        </div>
+                        <div class="handle">
+                            <h4 th:text="${user_NameSurname}">NameSurname</h4>
+                            <p class="muted" th:text="${'@' + userDetails.username}">@Username</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

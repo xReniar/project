@@ -21,14 +21,14 @@
                     <input type="search" placeholder="Search for friends">
                 </div>
                 <div th:if="${userDetails}" class="nav-utilities">
-                    <label class="btn btn-primary" for="login-logout">
-                        <a href="/logout">Logout</a>
-                    </label>
+                    <a href="/logout">
+                        <label class="btn btn-primary" for="login-logout">Logout</label>
+                    </a>
                 </div>
                 <div th:unless="${userDetails}">
-                    <label class="btn btn-primary" for="login-logout">
-                        <a href="/login">Login</a>
-                    </label>
+                    <a href="/login">
+                        <label class="btn btn-primary" for="login-logout">Login</label>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -45,16 +45,18 @@
                             <span><i class="uil uil-compass"></i></span>
                             <h3>Explore</h3>
                         </a>
-                        <a class="menu-item">
-                            <span><i class="uil uil-user"></i></span> 
-                            <h3>Users</h3>
+                        <a href="/user/analytics" class="menu-item">
+                            <span><i class="uil uil-graph-bar"></i></span> 
+                            <h3>Analytics</h3>
                         </a>
                         <a href="/user/settings" class="menu-item">
-                            <span><i class="uil uil-setting"></i></span> 
-                            <h3>Settings</h3>
+                            <span><i class="uil uil-user"></i></span> 
+                            <h3>Account</h3>
                         </a>
                     </div>
-                    <label for="create-post" class="btn btn-primary">Create Post</label>
+                    <a href="/user/formNewPost" class="menu-item">
+                        <label for="create-post" class="btn btn-primary">Create Post</label>
+                    </a>
                 </div>
             </div>
         </main>

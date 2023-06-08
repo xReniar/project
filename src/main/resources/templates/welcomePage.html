@@ -17,14 +17,14 @@
                     twitther
                 </h2>
                 <div th:if="${userDetails}" class="nav-utilities">
-                    <label class="btn btn-primary" for="login-logout">
-                        <a href="/logout">Logout</a>
-                    </label>
+                    <a href="/logout">
+                        <label class="btn btn-primary" for="login-logout">Logout</label>
+                    </a>
                 </div>
                 <div th:unless="${userDetails}">
-                    <label class="btn btn-primary" for="login-logout">
-                        <a href="/login">Login</a>
-                    </label>
+                    <a href="/login">
+                        <label class="btn btn-primary" for="login-logout">Login</label>
+                    </a>
                 </div>
             </div>
         </nav>
