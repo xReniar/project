@@ -10,8 +10,6 @@ import it.uniroma3.siw.project.repository.UserRepository;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,6 +63,6 @@ public class PostController {
             this.userRepository.save(author);
             this.postRepository.save(post);
         }
-        return "post.html";
+        return "index.html";
     }
 }

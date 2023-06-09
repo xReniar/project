@@ -25,7 +25,12 @@ public class UserController {
     GlobalController globalController;
 
     @GetMapping("/user/settings")
-    public String settings(){
+    public String settings(Model model){
+        User user = this.globalController.getCurrentUser();
+        model.addAttribute("posts",user.getPosts());
+        model.addAttribute("followers",user.getUsersFollowers());
+        model.addAttribute("following",user.getUsersFollowing());
+
         return "personalAccount.html";
     }
 
