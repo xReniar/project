@@ -58,6 +58,35 @@
                         <label for="create-post" class="btn btn-primary">Create Post</label>
                     </a>
                 </div>
+                <div class="middle">
+                    <div class="account">
+                        <div class="personal-info">
+                            <div class="profile-img">
+                                <img src="" alt="">
+                            </div>
+                            <div class="account-info">
+                                <h1 th:text="${userDetails.username}"></h1>
+                                <div class="account-analytics">
+                                    <div>
+                                        <p><b><span th:text="${currentUser.posts.getSize()}"></span></b></span> posts</p>
+                                    </div>
+                                    <div>
+                                        <p><b><span th:text="${followers.getSize()}"></span></b></span> followers</p>
+                                    </div>
+                                    <div>
+                                        <p><b><span th:text="${following.getSize()}"></span></b></span> following</p>
+                                    </div>
+                                </div>
+                                <b><p th:text="${currentUser.name + ' ' + currentUser.surname}"></p></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account">
+                        <div class="posts">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </body>
