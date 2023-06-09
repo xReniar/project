@@ -28,13 +28,19 @@ public class GlobalController {
         return user;
     }
 
+    @ModelAttribute("currentUser")
     public User getCurrentUser(){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Credentials credential = this.credentialsRepository.findByUsername(username).get();
-        return credential.getUser();
+        try {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            Credentials credential = this.credentialsRepository.findByUsername(username).get();
+            return credential.getUser();
+        } catch(Exception e) {
+            return null;
+        }
     }
 
-    @ModelAttribute("user_NameSurname")
+    /*
+     * @ModelAttribute("user_NameSurname")
     public String getUser_NameSurname(){
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -44,4 +50,5 @@ public class GlobalController {
             return "";
         }
     }
+     */
 }
