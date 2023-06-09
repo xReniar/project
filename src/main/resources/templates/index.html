@@ -299,7 +299,7 @@
                                 <img src="">
                             </div>
                             <div class="handle">
-                                <h4 th:text="${user_NameSurname}">NameSurname</h4>
+                                <h4 th:text="${currentUser.name + ' ' + currentUser.surname}">NameSurname</h4>
                                 <p class="muted" th:text="${'@' + userDetails.username}">@Username</p>
                             </div>
                         </a>
