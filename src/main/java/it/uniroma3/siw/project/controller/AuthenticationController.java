@@ -3,8 +3,14 @@ package it.uniroma3.siw.project.controller;
 import it.uniroma3.siw.project.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.project.controller.validator.UserValidator;
 import it.uniroma3.siw.project.model.Credentials;
+import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.User;
+import it.uniroma3.siw.project.repository.ImageRepository;
+
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +37,12 @@ public class AuthenticationController {
     @Autowired
     GlobalController globalController;
 
+    @Autowired
+    ResourceLoader resourceLoader;
+
+    @Autowired
+    ImageRepository imageRepository;
+
     @GetMapping(value = "/")
     public String welcomePage(Model model) {
         return "welcomePage.html";
@@ -48,11 +60,14 @@ public class AuthenticationController {
                                BindingResult userBindingResult,
                                @Valid @ModelAttribute("credentials") Credentials credentials,
                                BindingResult credentialsBindingResult,
-                               Model model) {
+                               Model model) throws IOException {
         this.userValidator.validate(user, userBindingResult);
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
         // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+            Image profilePicture = new Image(this.resourceLoader.getResource("classpath:static/images/noProfile.jpeg").getContentAsByteArray());
+            this.imageRepository.save(profilePicture);
+            user.setProfilePicture(profilePicture);
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             return "loginPage.html";
@@ -67,6 +82,10 @@ public class AuthenticationController {
 
     @GetMapping(value = {"/success","/index"})
     public String defaultAfterLogin(Model model) {
+        User currentUser = this.globalController.getCurrentUser();
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
         return "index.html";
     }
 }
