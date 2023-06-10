@@ -73,13 +73,23 @@
                 <div class="sidebar">
                     <a class="profile">
                         <div class="profile-photo">
-                            <img src="">
+                            <img th:src="@{'/image/' + ${currentUser.profilePicture.id}}">
                         </div>
                         <div class="handle">
-                            <h4 th:text="${user_NameSurname}">NameSurname</h4>
+                            <h4 th:text="${currentUser.name + ' ' + currentUser.surname}">NameSurname</h4>
                             <p class="muted" th:text="${'@' + userDetails.username}">@Username</p>
                         </div>
                     </a>
+                    <div class="account-info">
+                        <p><b th:text="${numPosts}"></b></span> posts</p>
+                        <p><b th:text="${numFollowers}"></b></span> followers</p>
+                        <p><b th:text="${numFollowing}"></b></span> following</p>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="lucky-followers">
+                        ciao
+                    </div>
                 </div>
             </div>
         </div>
