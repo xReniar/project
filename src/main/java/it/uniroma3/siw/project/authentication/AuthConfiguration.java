@@ -34,7 +34,7 @@ public class AuthConfiguration {
                 .authorizeHttpRequests((requests) -> {
                             try {
                                 requests
-                                        .requestMatchers(HttpMethod.GET, "/login", "/register","/",
+                                        .requestMatchers(HttpMethod.GET, "/login", "/register","/","/image/{id}",
                                                                          "/css/**", "/images/**", "favicon.ico").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                                         .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority(LOGGED_ROLE)
