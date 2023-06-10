@@ -241,3 +241,15 @@ main .container .right .profile {
     column-gap: 1rem;
     width: 100%;
 }
+
+.account-info {
+    padding-left: 5%;
+    padding-bottom: 2%;
+}
+
+.lucky-followers {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}

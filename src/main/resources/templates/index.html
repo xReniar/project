@@ -61,7 +61,7 @@
                 </div>
                 <!--================================== MIDDLE ==================================-->
                 <div class="middle">
-                    <div class="feeds">
+                    <ul class="feeds">
                         <div class="feed">
                             <div class="head">
                                 <div class="user">
@@ -72,19 +72,20 @@
                                         <h3>Zeonakraki</h3>
                                     </div>
                                 </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
                             </div>
                             <div class="photo">
-                                <img src="">
+                                <img th:src="@{'/image/' + ${52}}">
                             </div>
                             <div class="action-buttons">
                                 <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
+                                    <a href="#">
+                                        <span><i class="uil uil-heart"></i></span>
+                                    </a>
                                 </div>
                                 <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
+                                    <a href="#">
+                                        <span><i class="uil uil-comment-dots"></i></span>
+                                    </a>
                                 </div>
                             </div>
                             <div class="liked-by">
@@ -114,7 +115,45 @@
                                 </span>
                             </div>
                             <div class="photo">
-                                <img src="">
+                                <img th:src="@{'/image/' + ${2}}">
+                            </div>
+                            <div class="action-buttons">
+                                <div class="like-button">
+                                    <span><i class="uil uil-heart"></i></span>
+                                </div>
+                                <div class="comment-button">
+                                    <span><i class="uil uil-comment-dots"></i></span>
+                                </div>
+                            </div>
+                            <div class="liked-by">
+                                <span><img src=""></span>
+                                <span><img src=""></span>
+                                <span><img src=""></span>
+                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
+                            </div>
+                            <div class="caption">
+                                <p><b>Post author name</b> post text</p>
+                            </div>
+                            <div class="comments text-muted">
+                                View all 277 comments
+                            </div>
+                        </div>
+                        <div class="feed">
+                            <div class="head">
+                                <div class="user">
+                                    <div class="profile-photo">
+                                        <img src="" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <h3>Zeonakraki</h3>
+                                    </div>
+                                </div>
+                                <span class="edit">
+                                    <i class="uil uil-ellipsis-h"></i>
+                                </span>
+                            </div>
+                            <div class="photo">
+                                <img th:src="@{'/image/' + ${1}}">
                             </div>
                             <div class="action-buttons">
                                 <div class="like-button">
@@ -251,58 +290,30 @@
                                 View all 277 comments
                             </div>
                         </div>
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
-                            </div>
-                            <div class="photo">
-                                <img src="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
-                                </div>
-                                <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
-                            </div>
-                            <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                            <div class="comments text-muted">
-                                View all 277 comments
-                            </div>
-                        </div>
-                    </div>
+                    </ul>
                 </div>
                 <!--================================== RIGHT ==================================-->
                 <div class="right">
                     <div class="sidebar">
                         <a class="profile">
                             <div class="profile-photo">
-                                <img src="">
+                                <img th:src="@{'/image/' + ${currentUser.profilePicture.id}}">
                             </div>
                             <div class="handle">
                                 <h4 th:text="${currentUser.name + ' ' + currentUser.surname}">NameSurname</h4>
                                 <p class="muted" th:text="${'@' + userDetails.username}">@Username</p>
                             </div>
                         </a>
+                        <div class="account-info">
+                            <p><b th:text="${numPosts}"></b></span> posts</p>
+                            <p><b th:text="${numFollowers}"></b></span> followers</p>
+                            <p><b th:text="${numFollowing}"></b></span> following</p>
+                        </div>
+                    </div>
+                    <div class="sidebar">
+                        <div class="lucky-followers">
+                            ciao
+                        </div>
                     </div>
                 </div>
             </div>

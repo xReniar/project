@@ -62,13 +62,13 @@
                     <div class="account">
                         <div class="personal-info">
                             <div class="profile-img">
-                                <img src="" alt="">
+                                <img th:src="@{'/image/' + ${currentUser.profilePicture.id}}">
                             </div>
                             <div class="account-info">
                                 <h1 th:text="${userDetails.username}"></h1>
                                 <div class="account-analytics">
                                     <div>
-                                        <p><b><span th:text="${currentUser.posts.getSize()}"></span></b></span> posts</p>
+                                        <p><b><span th:text="${posts.getSize()}"></span></b></span> posts</p>
                                     </div>
                                     <div>
                                         <p><b><span th:text="${followers.getSize()}"></span></b></span> followers</p>
@@ -80,10 +80,14 @@
                                 <b><p th:text="${currentUser.name + ' ' + currentUser.surname}"></p></b>
                             </div>
                         </div>
-                    </div>
-                    <div class="account">
                         <div class="posts">
-                            
+                            <ul th:each="post : ${posts}">
+                                <div class="post">
+                                    <a href="#">
+                                        <img th:src="@{'/image/' + ${post.picture.id}}">
+                                    </a>
+                                </div>
+                            </ul>
                         </div>
                     </div>
                 </div>
