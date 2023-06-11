@@ -4,6 +4,10 @@ body {
     align-items: center;
     height: 100vh;
     background-image: url("/images/pattern.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .form_container {
