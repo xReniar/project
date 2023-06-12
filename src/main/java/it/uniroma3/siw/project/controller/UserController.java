@@ -60,5 +60,26 @@ public class UserController {
         model.addAttribute("user", this.userRepository.findById(userId).get());
         return "userAccount.html";
     }
+
+     @GetMapping("/user/followUser/{userId}")
+    public String followUser(Model model, @PathVariable("userId") Long userId){
+
+        User currentUser = this.globalController.getCurrentUser();
+        User userToFollow = this.userRepository.findById(userId).get();
+
+        currentUser.getUsersFollowing().add(userToFollow);
+        this.userRepository.save(currentUser);
+
+        userToFollow.getUsersFollowers().add(currentUser);
+        this.userRepository.save(userToFollow);
+
+        model.addAttribute("user", userToFollow);
+        model.addAttribute("posts",userToFollow.getPosts());
+        model.addAttribute("followers",userToFollow.getUsersFollowers());
+        model.addAttribute("following",userToFollow.getUsersFollowing());
+
+
+        return "userAccount.html";
+    }
     
 }
