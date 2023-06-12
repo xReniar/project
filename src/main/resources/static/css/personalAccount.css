@@ -20,6 +20,7 @@ main .container {
     display: grid;
     grid-template-columns: 15vw auto;
     position: relative;
+    padding-bottom: 1%;
 }
 
 .profile-img {
@@ -34,7 +35,8 @@ main .container {
 .profile-img img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .account-info {
@@ -71,7 +73,18 @@ main .container {
     object-fit: contain;
 }
 
+.account-options {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    margin: 2%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
 
+.account-item {
+    padding: 1.5% 0;
+}
 
 #popup-container {
     display: none;
