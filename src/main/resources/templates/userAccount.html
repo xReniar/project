@@ -69,10 +69,10 @@
                         <div class="account-info">
                             <div>
                                 <h1 th:text="${user.username}"></h1>
-                                <div>
+                                <div th:unless="${followers.contains(currentUser)}">
                                     <a th:href="@{'/user/followUser/' + ${user.id}}"><button class="btn btn-primary" id="open-popup">Follow</button></a>
                                 </div>
-                                <div>
+                                <div th:if="${followers.contains(currentUser)}">
                                     <a th:href="@{'/user/unfollowUser/' + ${user.id}}"><button class="btn btn-primary" id="open-popup">Unfollow</button></a>
                                 </div>
                             </div>
