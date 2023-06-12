@@ -57,11 +57,18 @@ public class UserController {
 
     @GetMapping("/user/{userId}")
     public String getUserProfile(Model model,@PathVariable("userId") Long userId) {
-        model.addAttribute("user", this.userRepository.findById(userId).get());
+        User otherUser = this.userRepository.findById(userId).get();
+        model.addAttribute("user", otherUser);
+        model.addAttribute("posts", otherUser.getPosts());
+        model.addAttribute("followers", otherUser.getUsersFollowers());
+        model.addAttribute("following", otherUser.getUsersFollowing());
+        if(userId == this.globalController.getCurrentUser().getId()){
+            return "personalAccount.html";
+        }
         return "userAccount.html";
     }
 
-     @GetMapping("/user/followUser/{userId}")
+    @GetMapping("/user/followUser/{userId}")
     public String followUser(Model model, @PathVariable("userId") Long userId){
 
         User currentUser = this.globalController.getCurrentUser();
@@ -77,9 +84,28 @@ public class UserController {
         model.addAttribute("posts",userToFollow.getPosts());
         model.addAttribute("followers",userToFollow.getUsersFollowers());
         model.addAttribute("following",userToFollow.getUsersFollowing());
-
-
         return "userAccount.html";
     }
+
+    @GetMapping("/user/unfollowUser/{userId}")
+    public String unfollowUser(Model model, @PathVariable("userId") Long userId){
+
+        User currentUser = this.globalController.getCurrentUser();
+        User userToUnfollow = this.userRepository.findById(userId).get();
+
+        currentUser.getUsersFollowing().remove(userToUnfollow);
+        this.userRepository.save(currentUser);
+
+        userToUnfollow.getUsersFollowers().remove(currentUser);
+        this.userRepository.save(userToUnfollow);
+
+        model.addAttribute("user", userToUnfollow);
+        model.addAttribute("posts",userToUnfollow.getPosts());
+        model.addAttribute("followers",userToUnfollow.getUsersFollowers());
+        model.addAttribute("following",userToUnfollow.getUsersFollowing());
+        return "userAccount.html";
+    }
+
+
     
 }
