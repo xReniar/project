@@ -2,21 +2,22 @@ package it.uniroma3.siw.project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User author;
+    
     @NotBlank
     private String text;
-    @NotBlank
-    @ManyToOne
-    private User author;
-    @NotBlank
-    @OneToMany
-    private List<User> likedUsers;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<User> likedUsers;
 
     public Long getId() {
         return id;
@@ -42,11 +43,11 @@ public class Comment {
         this.author = author;
     }
 
-    public List<User> getLikedUsers() {
+    public Set<User> getLikedUsers() {
         return likedUsers;
     }
 
-    public void setLikedUsers(List<User> likedUsers) {
+    public void setLikedUsers(Set<User> likedUsers) {
         this.likedUsers = likedUsers;
     }
 }

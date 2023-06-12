@@ -3,8 +3,8 @@ package it.uniroma3.siw.project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -17,21 +17,19 @@ public class User {
     @NotBlank
     private String surname;
     @NotBlank
-    private String username;
-    @NotBlank
     private String email;
 
     @OneToOne
-    private Photo profilePicture;
+    private Image profilePicture;
 
-    @OneToMany(mappedBy = "author")
-    private List<Post> posts;
+    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
+    private Set<Post> posts;
 
-    @OneToMany
-    private List<User> usersFollowing;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<User> usersFollowing;
 
-    @OneToMany
-    private List<User> usersFollowers;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<User> usersFollowers;
 
     public Long getId() {
         return id;
@@ -57,35 +55,27 @@ public class User {
         this.surname = surname;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<Post> getPosts() {
+    public Set<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
 
-    public List<User> getUsersFollowing() {
+    public Set<User> getUsersFollowing() {
         return usersFollowing;
     }
 
-    public void setUsersFollowing(List<User> usersFollowing) {
+    public void setUsersFollowing(Set<User> usersFollowing) {
         this.usersFollowing = usersFollowing;
     }
 
-    public List<User> getUsersFollowers() {
+    public Set<User> getUsersFollowers() {
         return usersFollowers;
     }
 
-    public void setUsersFollowers(List<User> usersFollowers) {
+    public void setUsersFollowers(Set<User> usersFollowers) {
         this.usersFollowers = usersFollowers;
     }
 
@@ -97,11 +87,11 @@ public class User {
         this.email = email;
     }
 
-    public Photo getProfilePicture() {
+    public Image getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Photo profilePicture) {
+    public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
     }
 
@@ -110,11 +100,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(username, user.username) && Objects.equals(posts, user.posts) && Objects.equals(usersFollowing, user.usersFollowing) && Objects.equals(usersFollowers, user.usersFollowers);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(posts, user.posts) && Objects.equals(usersFollowing, user.usersFollowing) && Objects.equals(usersFollowers, user.usersFollowers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, username);
+        return Objects.hash(id, name, surname);
     }
 }

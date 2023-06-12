@@ -64,12 +64,17 @@
                 <div class="account">
                     <div class="personal-info">
                         <div class="profile-img">
-                            <img th:src="@{'/image/' + ${currentUser.profilePicture.id}}">
+                            <img th:src="@{'/image/' + ${user.profilePicture.id}}">
                         </div>
                         <div class="account-info">
                             <div>
-                                <h1 th:text="${userDetails.username}"></h1>
-                                <a><button class="btn btn-primary" id="open-popup">Update Image</button></a>
+                                <h1 th:text="${user.username}"></h1>
+                                <div>
+                                    <a th:href="@{'/user/followUser/' + ${user.id}}"><button class="btn btn-primary" id="open-popup">Follow</button></a>
+                                </div>
+                                <div>
+                                    <a th:href="@{'/user/unfollowUser/' + ${user.id}}"><button class="btn btn-primary" id="open-popup">Unfollow</button></a>
+                                </div>
                             </div>
                             <div class="account-analytics">
                                 <div>
@@ -83,7 +88,7 @@
                                 </div>
                             </div>
                             <b>
-                                <p th:text="${currentUser.name + ' ' + currentUser.surname}"></p>
+                                <p th:text="${user.name + ' ' + user.surname}"></p>
                             </b>
                         </div>
                     </div>
@@ -111,34 +116,6 @@
             </div>
         </div>
     </main>
-    <div id="popup-container">
-        <div id="popup-content">
-            <form th:action="@{'/user/updateProfilePicture'}" method="post" enctype="multipart/form-data">
-                <h2>Select new profile picture</h2>
-                <input required type="file" name="image">
-                <button type="submit" id="close-popup" class="btn btn-primary">Update Image</button>
-            </form>
-        </div>
-    </div>
-    <script>
-        const openButton = document.getElementById('open-popup');
-        const closeButton = document.getElementById('close-popup');
-        const popupContainer = document.getElementById('popup-container');
-
-        // Event listener for the open button
-        openButton.addEventListener('click', function () {
-            popupContainer.style.display = 'block';
-        });
-
-        // Event listener for the close button
-        closeButton.addEventListener('click', function () {
-            popupContainer.style.display = 'none';
-        });
-
-        popupContainer.addEventListener('click', function() {
-            popupContainer.style.display = 'none';
-        });
-    </script>
 </body>
 
 </html>

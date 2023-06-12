@@ -1,12 +1,16 @@
 package it.uniroma3.siw.project.controller;
 
+import it.uniroma3.siw.project.controller.validator.CredentialsValidator;
+import it.uniroma3.siw.project.controller.validator.UserValidator;
 import it.uniroma3.siw.project.model.Credentials;
+import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.User;
+import it.uniroma3.siw.project.repository.ImageRepository;
+
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,13 +26,53 @@ import it.uniroma3.siw.project.service.CredentialsService;
 public class AuthenticationController {
 
     @Autowired
-    private CredentialsService credentialsService;
+    CredentialsService credentialsService;
+
+    @Autowired
+    UserValidator userValidator;
+
+    @Autowired
+    CredentialsValidator credentialsValidator;
+
+    @Autowired
+    GlobalController globalController;
+
+    @Autowired
+    ResourceLoader resourceLoader;
+
+    @Autowired
+    ImageRepository imageRepository;
+
+    @GetMapping(value = "/")
+    public String welcomePage(Model model) {
+        return "welcomePage.html";
+    }
 
     @GetMapping(value = "/register")
     public String showRegisterForm (Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("credentials", new Credentials());
-        return "userRegisterPage.html";
+        return "registerPage.html";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid @ModelAttribute("user") User user,
+                               BindingResult userBindingResult,
+                               @Valid @ModelAttribute("credentials") Credentials credentials,
+                               BindingResult credentialsBindingResult,
+                               Model model) throws IOException {
+        this.userValidator.validate(user, userBindingResult);
+        this.credentialsValidator.validate(credentials, credentialsBindingResult);
+        // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+            Image profilePicture = new Image(this.resourceLoader.getResource("classpath:static/images/noProfile.jpeg").getContentAsByteArray());
+            this.imageRepository.save(profilePicture);
+            user.setProfilePicture(profilePicture);
+            credentials.setUser(user);
+            credentialsService.saveCredentials(credentials);
+            return "loginPage.html";
+        }
+        return showRegisterForm(model);
     }
 
     @GetMapping(value = "/login")
@@ -36,39 +80,12 @@ public class AuthenticationController {
         return "loginPage.html";
     }
 
-
-    @GetMapping(value = "/")
-    public String index(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken) {
-            return "loginPage.html";
-        }
-        else {
-            return "index.html";
-        }
-    }
-
-    @GetMapping(value = "/success")
+    @GetMapping(value = {"/success","/index"})
     public String defaultAfterLogin(Model model) {
+        User currentUser = this.globalController.getCurrentUser();
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
         return "index.html";
     }
-
-    @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("user") User user,
-                               BindingResult userBindingResult, @Valid
-                               @ModelAttribute("credentials") Credentials credentials,
-                               BindingResult credentialsBindingResult,
-                               Model model) {
-
-        user.setUsername(credentials.getUsername());
-        // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
-            credentials.setUser(user);
-            credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
-            return "loginPage.html";
-        }
-        return "userRegisterPage.html";
-    }
-
 }

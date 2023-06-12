@@ -1,21 +1,23 @@
 package it.uniroma3.siw.project.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Credentials {
 
-    public static final String DEFAULT_ROLE = "DEFAULT";
-    public static final String ADMIN_ROLE = "ADMIN";
+    public static final String LOGGED_ROLE = "AUTHENTICATED";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
+    private String username;
+    @NotBlank
     private String password;
     private String role;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
-    private String username;
 
     public Long getId() {
         return id;
