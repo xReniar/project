@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,6 +53,12 @@ public class UserController {
         model.addAttribute("followers",user.getUsersFollowers());
         model.addAttribute("following",user.getUsersFollowing());
         return "personalAccount.html";
+    }
+
+    @GetMapping("/user/{userId}")
+    public String getUserProfile(Model model,@PathVariable("userId") Long userId) {
+        model.addAttribute("user", this.userRepository.findById(userId).get());
+        return "userAccount.html";
     }
     
 }
