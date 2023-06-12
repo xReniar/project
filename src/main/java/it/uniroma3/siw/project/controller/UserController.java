@@ -62,6 +62,9 @@ public class UserController {
         model.addAttribute("posts", otherUser.getPosts());
         model.addAttribute("followers", otherUser.getUsersFollowers());
         model.addAttribute("following", otherUser.getUsersFollowing());
+        if(userId == this.globalController.getCurrentUser().getId()){
+            return "personalAccount.html";
+        }
         return "userAccount.html";
     }
 
