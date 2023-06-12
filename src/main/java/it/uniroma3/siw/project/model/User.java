@@ -19,6 +19,8 @@ public class User {
     @NotBlank
     private String email;
 
+    private String username;
+
     @OneToOne
     private Image profilePicture;
 
@@ -85,6 +87,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername(){
+        return this.username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
     }
 
     public Image getProfilePicture() {

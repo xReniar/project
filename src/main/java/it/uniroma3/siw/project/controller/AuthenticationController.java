@@ -68,6 +68,7 @@ public class AuthenticationController {
             Image profilePicture = new Image(this.resourceLoader.getResource("classpath:static/images/noProfile.jpeg").getContentAsByteArray());
             this.imageRepository.save(profilePicture);
             user.setProfilePicture(profilePicture);
+            user.setUsername(credentials.getUsername());
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             return "loginPage.html";
