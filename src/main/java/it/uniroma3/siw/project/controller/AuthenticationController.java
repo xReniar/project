@@ -6,6 +6,7 @@ import it.uniroma3.siw.project.model.Credentials;
 import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.User;
 import it.uniroma3.siw.project.repository.ImageRepository;
+import it.uniroma3.siw.project.repository.PostRepository;
 
 import java.io.IOException;
 
@@ -42,6 +43,9 @@ public class AuthenticationController {
 
     @Autowired
     ImageRepository imageRepository;
+
+    @Autowired
+    PostRepository postRepository;
 
     @GetMapping(value = "/")
     public String welcomePage(Model model) {
@@ -87,6 +91,7 @@ public class AuthenticationController {
         model.addAttribute("numPosts", currentUser.getPosts().size());
         model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
         model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
+        model.addAttribute("posts", this.postRepository.findAll());
         return "index.html";
     }
 }
