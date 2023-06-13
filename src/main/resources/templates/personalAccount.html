@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/personalAccount.css">
+    <link rel="stylesheet" href="/css/accountPageInfos.css">
     <title>Title</title>
+    <!-- TODO: add titles to each page-->
 </head>
 
 <body>
@@ -108,10 +110,15 @@
                         </ul>
                     </div>
                     <div class="followers" id="followersContainer">
-                        FOLLOWERS
+                        <div class="follower" th:each="follower : ${followers}">
+                            <a th:href="@{'/user/' + ${follower.id}}" th:text="${follower.username}">username</a>
+                            <!-- TODO: add div for no followers-->
+                        </div>
                     </div>
                     <div class="following" id="followingContainer">
-                        FOLLOWING
+                        <div class="followingUser" th:each="followingUser : ${following}">
+                            <a th:href="@{'/user/' + ${followingUser.id}}" th:text="${followingUser.username}">username</a>
+                        </div>
                     </div>
                 </div>
             </div>

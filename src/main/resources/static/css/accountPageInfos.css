@@ -1,0 +1,13 @@
+#followingContainer, #followersContainer{
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: 1fr; 
+    grid-column-gap: 24px;
+    grid-row-gap: 0px;
+}
+
+.follower, .followingUser{
+    padding: 3px 10px;
+    border: 1px dashed red; /*debug line*/
+    
+}
