@@ -104,8 +104,5 @@ public class UserController {
         model.addAttribute("followers",userToUnfollow.getUsersFollowers());
         model.addAttribute("following",userToUnfollow.getUsersFollowing());
         return "userAccount.html";
-    }
-
-
-    
+    }    
 }
