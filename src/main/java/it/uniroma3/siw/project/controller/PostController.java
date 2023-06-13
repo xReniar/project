@@ -1,6 +1,7 @@
 package it.uniroma3.siw.project.controller;
 
 import it.uniroma3.siw.project.controller.validator.PostValidator;
+import it.uniroma3.siw.project.model.Comment;
 import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.Post;
 import it.uniroma3.siw.project.model.User;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,6 +65,19 @@ public class PostController {
             this.userRepository.save(author);
             this.postRepository.save(post);
         }
+        User currentUser = this.globalController.getCurrentUser();
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
+        model.addAttribute("posts", this.postRepository.findAll());
         return "index.html";
+    }
+
+    @GetMapping("/user/post/{postId}")
+    public String getPost(Model model,@PathVariable("postId") Long id){
+        Post post = this.postRepository.findById(id).get();
+        model.addAttribute("post", post);
+        model.addAttribute("comment", new Comment());
+        return "post.html";
     }
 }
