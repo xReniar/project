@@ -1,4 +1,4 @@
-#followersContainer{
+.followers{
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -6,7 +6,7 @@
     align-items: start;
 }
 
-#followingContainer{
+.following{
     display: flex;
     flex-direction: row;
     justify-content: start;

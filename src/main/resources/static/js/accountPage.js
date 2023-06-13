@@ -20,12 +20,12 @@ postsButton.addEventListener('click', ()=>{
 followingButton.addEventListener('click', ()=>{
     postsContainer.style.display='none'
     followersContainer.style.display='none'
-    followingContainer.style.display='block'
+    followingContainer.style.display='flex'
 
 })
 
 followersButton.addEventListener('click', ()=>{
     postsContainer.style.display='none'
-    followersContainer.style.display='block'
+    followersContainer.style.display='flex'
     followingContainer.style.display='none'
 })
