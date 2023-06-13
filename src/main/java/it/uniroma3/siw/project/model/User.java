@@ -3,6 +3,7 @@ package it.uniroma3.siw.project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,12 +26,12 @@ public class User {
     private Image profilePicture;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
-    private Set<Post> posts;
+    private List<Post> posts;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<User> usersFollowing;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "usersFollowing",fetch = FetchType.LAZY)
     private Set<User> usersFollowers;
 
     public Long getId() {
@@ -57,11 +58,11 @@ public class User {
         this.surname = surname;
     }
 
-    public Set<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Set<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 
