@@ -60,6 +60,7 @@
                     <label for="create-post" class="btn btn-primary">Create Post</label>
                 </a>
             </div>
+            <!--================================== CENTER ==================================-->
             <div class="middle">
                 <div class="account">
                     <div class="personal-info">
@@ -92,18 +93,20 @@
                             </b>
                         </div>
                     </div>
+
                     <div class="account-options">
-                        <a href="/user/settings" class="account-item">
+                        <a class="account-item" id="postsButton">
                             <span><i class="uil uil-user-circle"></i><b>posts</b></span>
                         </a>
-                        <a href="/user/settings" class="account-item">
+                        <a class="account-item" id="followersButton">
                             <span><i class="uil uil-users-alt"></i><b>follower</b></span>
                         </a>
-                        <a href="/user/settings" class="account-item">
+                        <a class="account-item" id="followingButton">
                             <span><i class="uil uil-users-alt"></i><b>following</b></span>
                         </a>
                     </div>
-                    <div class="posts">
+
+                    <div class="posts" id="postsContainer">
                         <ul th:each="post : ${posts}">
                             <div class="post">
                                 <a href="#">
@@ -112,10 +115,16 @@
                             </div>
                         </ul>
                     </div>
+                    <div class="followers" id="followersContainer">
+                        FOLLOWERS
+                    </div>
+                    <div class="following" id="followingContainer">
+                        FOLLOWING
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
-
+    <script src="/js/accountPage.js"></script>
 </html>
