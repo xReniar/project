@@ -57,15 +57,21 @@ public class UserController {
 
     @GetMapping("/user/{userId}")
     public String getUserProfile(Model model,@PathVariable("userId") Long userId) {
-        User otherUser = this.userRepository.findById(userId).get();
-        model.addAttribute("user", otherUser);
-        model.addAttribute("posts", otherUser.getPosts());
-        model.addAttribute("followers", otherUser.getUsersFollowers());
-        model.addAttribute("following", otherUser.getUsersFollowing());
+        User user = null;
+        String page = null;
         if(userId == this.globalController.getCurrentUser().getId()){
-            return "personalAccount.html";
+            page = "personalAccount.html";
+            user = this.globalController.getCurrentUser();
+        } else {
+            page = "userAccount.html";
+            user = this.userRepository.findById(userId).get();
         }
-        return "userAccount.html";
+        model.addAttribute("user", user);
+        model.addAttribute("posts", user.getPosts());
+        model.addAttribute("followers", user.getUsersFollowers());
+        model.addAttribute("following", user.getUsersFollowing());
+
+        return page;
     }
 
     @GetMapping("/user/followUser/{userId}")
