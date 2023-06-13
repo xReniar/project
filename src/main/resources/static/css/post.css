@@ -1,0 +1,19 @@
+main .container .middle {
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top);
+}
+
+.comment-form textarea {
+    width: 100%;
+    resize: none;
+    font-family: inherit;
+    font-size: inherit;
+    padding-bottom: 5%;
+}
+
+.comment-form-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
