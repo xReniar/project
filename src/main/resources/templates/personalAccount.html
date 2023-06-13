@@ -110,16 +110,18 @@
                         </ul>
                     </div>
                     <div class="followers" id="followersContainer">
-                        <div class="follower" th:each="follower : ${followers}">
+                        <ul class="follower" th:each="follower : ${followers}">
                             <a th:href="@{'/user/' + ${follower.id}}" th:text="${follower.username}">username</a>
                             <!-- TODO: add div for no followers-->
-                        </div>
+                        </ul>
                     </div>
+
                     <div class="following" id="followingContainer">
-                        <div class="followingUser" th:each="followingUser : ${following}">
+                        <ul class="followingUser" th:each="followingUser : ${following}">
                             <a th:href="@{'/user/' + ${followingUser.id}}" th:text="${followingUser.username}">username</a>
-                        </div>
+                        </ul>
                     </div>
+
                 </div>
             </div>
         </div>

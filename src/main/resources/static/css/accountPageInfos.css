@@ -1,13 +1,25 @@
-#followingContainer, #followersContainer{
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    grid-template-rows: 1fr; 
-    grid-column-gap: 24px;
-    grid-row-gap: 0px;
+#followersContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    align-items: start;
 }
 
-.follower, .followingUser{
-    padding: 3px 10px;
-    border: 1px dashed red; /*debug line*/
-    
+#followingContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    align-items: start;
+}
+
+.followingUser{
+    width:48%;
+    margin: 1%;
+}  
+
+.follower{
+    width:48%;
+    margin: 1%;
 }
