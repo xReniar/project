@@ -61,233 +61,38 @@
                 </div>
                 <!--================================== MIDDLE ==================================-->
                 <div class="middle">
-                    <ul class="feeds">
+                    <ul th:each="post : ${posts}" class="feeds">
                         <div class="feed">
                             <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
+                                <a th:href="@{'/user/' + ${post.author.id}}" class>
+                                    <div class="user">
+                                        <div class="profile-photo">
+                                            <img th:src="@{'/image/' + ${post.author.profilePicture.id}}">
+                                        </div>
+                                        <div class="info">
+                                            <h3 th:text="${post.author.username}">.</h3>
+                                        </div>
                                     </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="photo">
-                                <img th:src="@{'/image/' + ${52}}">
+                                <img th:src="@{'/image/' + ${post.picture.id}}">
                             </div>
                             <div class="action-buttons">
                                 <div class="like-button">
-                                    <a href="#">
-                                        <span><i class="uil uil-heart"></i></span>
-                                    </a>
+                                    <span><i class="uil uil-heart"></i></span>
                                 </div>
                                 <div class="comment-button">
-                                    <a href="#">
+                                    <a th:href="@{'/user/post/' + ${post.id}}">
                                         <span><i class="uil uil-comment-dots"></i></span>
                                     </a>
                                 </div>
                             </div>
                             <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
+                                <p>Liked by <b>2323</b> people</p>
                             </div>
                             <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                        </div>
-
-                        <!--ONLY COPY-->
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
-                            </div>
-                            <div class="photo">
-                                <img th:src="@{'/image/' + ${2}}">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
-                                </div>
-                                <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
-                            </div>
-                            <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                            <div class="comments text-muted">
-                                View all 277 comments
-                            </div>
-                        </div>
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
-                            </div>
-                            <div class="photo">
-                                <img th:src="@{'/image/' + ${1}}">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
-                                </div>
-                                <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
-                            </div>
-                            <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                            <div class="comments text-muted">
-                                View all 277 comments
-                            </div>
-                        </div>
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
-                            </div>
-                            <div class="photo">
-                                <img src="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
-                                </div>
-                                <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
-                            </div>
-                            <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                            <div class="comments text-muted">
-                                View all 277 comments
-                            </div>
-                        </div>
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
-                            </div>
-                            <div class="photo">
-                                <img src="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
-                                </div>
-                                <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
-                            </div>
-                            <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                            <div class="comments text-muted">
-                                View all 277 comments
-                            </div>
-                        </div>
-                        <div class="feed">
-                            <div class="head">
-                                <div class="user">
-                                    <div class="profile-photo">
-                                        <img src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <h3>Zeonakraki</h3>
-                                    </div>
-                                </div>
-                                <span class="edit">
-                                    <i class="uil uil-ellipsis-h"></i>
-                                </span>
-                            </div>
-                            <div class="photo">
-                                <img src="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <span><i class="uil uil-heart"></i></span>
-                                </div>
-                                <div class="comment-button">
-                                    <span><i class="uil uil-comment-dots"></i></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <span><img src=""></span>
-                                <p>Liked by <b>User</b> and <b>2323 others</b></p>
-                            </div>
-                            <div class="caption">
-                                <p><b>Post author name</b> post text</p>
-                            </div>
-                            <div class="comments text-muted">
-                                View all 277 comments
+                                <p><b th:text="${post.author.username}">.</b> <span th:text="${post.text}">.</span></p>
                             </div>
                         </div>
                     </ul>
