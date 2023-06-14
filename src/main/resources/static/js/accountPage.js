@@ -12,20 +12,20 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 postsButton.addEventListener('click', ()=>{
-    postsContainer.style.display='block'
+    postContainer.style.display='flex'
     followersContainer.style.display='none'
     followingContainer.style.display='none'
 })
 
 followingButton.addEventListener('click', ()=>{
-    postsContainer.style.display='none'
+    postContainer.style.display='none'
     followersContainer.style.display='none'
     followingContainer.style.display='flex'
 
 })
 
 followersButton.addEventListener('click', ()=>{
-    postsContainer.style.display='none'
+    postContainer.style.display='none'
     followersContainer.style.display='flex'
     followingContainer.style.display='none'
 })
