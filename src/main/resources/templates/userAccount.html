@@ -110,7 +110,7 @@
                     <div class="posts" id="postsContainer">
                         <ul th:each="post : ${posts}">
                             <div class="post">
-                                <a href="#">
+                                <a th:href="@{'/user/post/' + ${post.id}}">
                                     <img th:src="@{'/image/' + ${post.picture.id}}">
                                 </a>
                             </div>
