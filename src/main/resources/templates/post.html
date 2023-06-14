@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Project</title>
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/base.css">
         <link rel="stylesheet" href="/css/index.css">
         <link rel="stylesheet" href="/css/post.css">
@@ -80,13 +81,17 @@
                         </div>
                         <div class="action-buttons">
                             <div class="like-button">
-                                <a href="#">
+                                <a th:if="${#lists.contains(post.likedUsers,currentUser)}"  th:href="@{'/user/post/unlike/' + ${post.id}}">
+                                    <span><i class="fa fa-heart" style="color:red; margin-left: 20%;"></i></i></span>
+                                </a>
+                                <a th:unless="${#lists.contains(post.likedUsers,currentUser)}" th:href="@{'/user/post/like/' + ${post.id}}">
                                     <span><i class="uil uil-heart"></i></span>
                                 </a>
                             </div>
                         </div>
                         <div class="liked-by">
-                            <p>Liked by <b th:text="${post.likedUsers.size}">.</b> people</p>
+                            <p th:if="${post.likedUsers}">Liked by <b th:text="${post.likedUsers.size()}">.</b> people</p>
+                            <p th:unless="${post.likedUsers}">Liked by <b>0</b> people</p>
                         </div>
                         <div class="caption">
                             <p><b th:text="${post.author.username}">.</b> <span th:text="${post.text}">.</span></p>
