@@ -7,6 +7,7 @@ import it.uniroma3.siw.project.model.Image;
 import it.uniroma3.siw.project.model.User;
 import it.uniroma3.siw.project.repository.ImageRepository;
 import it.uniroma3.siw.project.repository.PostRepository;
+import it.uniroma3.siw.project.repository.UserRepository;
 
 import java.io.IOException;
 
@@ -46,6 +47,9 @@ public class AuthenticationController {
 
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping(value = "/")
     public String welcomePage(Model model) {
