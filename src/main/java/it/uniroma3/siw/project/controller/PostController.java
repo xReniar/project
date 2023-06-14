@@ -73,7 +73,6 @@ public class PostController {
             Post correctPost = this.postRepository.findById(savedPost.getId()).get();
             correctPost.setLikedUsers(new HashSet<User>());
             model.addAttribute("post", correctPost);
-            System.out.println("###################################################" + correctPost.getLikedUsers());
             model.addAttribute("comment", new Comment());
             model.addAttribute("comments", correctPost.getComments());
             return "post.html";
