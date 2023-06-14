@@ -30,11 +30,15 @@ public class CommentController {
                                  @PathVariable("postId") Long postId){
         Post post = this.postRepository.findById(postId).get();
         comment.setAuthor(this.globalController.getCurrentUser());
+        model.addAttribute("comment", new Comment());
         if(!this.postRepository.hasCommentWithAuthor(post,this.globalController.getCurrentUser())){
             post.getComments().add(comment);
             this.commentRepository.save(comment);
             this.postRepository.save(post);
+            model.addAttribute("comment", null);
         }
-        return "";
+        model.addAttribute("post", post);
+        model.addAttribute("comments", post.getComments());
+        return "post.html";
     }
 }
