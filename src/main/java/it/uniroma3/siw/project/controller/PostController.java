@@ -77,7 +77,9 @@ public class PostController {
     public String getPost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
         model.addAttribute("post", post);
-        model.addAttribute("comment", new Comment());
+        if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
+            model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", post.getComments());
         return "post.html";
     }
 }
