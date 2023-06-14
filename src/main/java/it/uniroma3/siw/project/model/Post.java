@@ -20,7 +20,7 @@ public class Post {
     @OneToOne
     private Image picture;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private Set<User> likedUsers;
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Comment> comments;
