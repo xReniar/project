@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/personalAccount.css">
+    <link rel="stylesheet" href="/css/accountPageInfos.css">
     <title>Title</title>
+    <!-- TODO: add titles to each page-->
 </head>
 
 <body>
@@ -88,17 +90,18 @@
                         </div>
                     </div>
                     <div class="account-options">
-                        <a href="/user/settings" class="account-item">
+                        <a id="postsButton" class="account-item">
                             <span><i class="uil uil-user-circle"></i><b>posts</b></span>
                         </a>
-                        <a href="/user/settings" class="account-item">
+                        <a id="followersButton" class="account-item">
                             <span><i class="uil uil-users-alt"></i><b>follower</b></span>
                         </a>
-                        <a href="/user/settings" class="account-item">
+                        <a id="followingButton" class="account-item">
                             <span><i class="uil uil-users-alt"></i><b>following</b></span>
                         </a>
                     </div>
-                    <div class="posts">
+                    <!--========= CONTAINERS ==========-->
+                    <div class="posts" id="postsContainer">
                         <ul th:each="post : ${posts}">
                             <div class="post">
                                 <a th:href="@{'/user/post/' + ${post.id}}">
@@ -107,6 +110,27 @@
                             </div>
                         </ul>
                     </div>
+                    <div class="followers" id="followersContainer">
+                        <p th:if="${#lists.isEmpty(followers)}" th:text="${userDetails.username + ' has no followers'}" style="margin-left: 15px;"></p>
+                        <a th:href="@{'/user/' + ${follower.id}}" class="follower" th:each="follower : ${followers}">  
+                            <div class="small-profile-img">
+                                <img th:src="@{'/image/' + ${follower.profilePicture.id}}">
+                            </div>
+                            <span  th:text="${follower.username}">username</span>
+                        </a>
+
+                    </div>
+                    <div class="following" id="followingContainer">
+                        <p th:if="${#lists.isEmpty(following)}" th:text="${userDetails.username + ' has no following users'}" style="margin-left: 15px;"></p>
+                        <a th:href="@{'/user/' + ${followingUser.id}}" class="followingUser" th:each="followingUser : ${following}">
+                            <div class="small-profile-img">
+                                <img th:src="@{'/image/' + ${followingUser.profilePicture.id}}">
+                            </div>
+                            <span th:text="${followingUser.username}">username</span>
+                        </a>
+                        
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -120,6 +144,7 @@
             </form>
         </div>
     </div>
+</body>
     <script>
         const openButton = document.getElementById('open-popup');
         const closeButton = document.getElementById('close-popup');
@@ -139,6 +164,5 @@
             popupContainer.style.display = 'none';
         });
     </script>
-</body>
-
+    <script src="/js/accountPage.js"></script>
 </html>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/personalAccount.css">
+    <link rel="stylesheet" href="/css/accountPageInfos.css">
     <title>Title</title>
 </head>
 
@@ -60,6 +61,7 @@
                     <label for="create-post" class="btn btn-primary">Create Post</label>
                 </a>
             </div>
+            <!--================================== CENTER ==================================-->
             <div class="middle">
                 <div class="account">
                     <div class="personal-info">
@@ -92,18 +94,20 @@
                             </b>
                         </div>
                     </div>
+
                     <div class="account-options">
-                        <a href="/user/settings" class="account-item">
+                        <a class="account-item" id="postsButton">
                             <span><i class="uil uil-user-circle"></i><b>posts</b></span>
                         </a>
-                        <a href="/user/settings" class="account-item">
+                        <a class="account-item" id="followersButton">
                             <span><i class="uil uil-users-alt"></i><b>follower</b></span>
                         </a>
-                        <a href="/user/settings" class="account-item">
+                        <a class="account-item" id="followingButton">
                             <span><i class="uil uil-users-alt"></i><b>following</b></span>
                         </a>
                     </div>
-                    <div class="posts">
+
+                    <div class="posts" id="postsContainer">
                         <ul th:each="post : ${posts}">
                             <div class="post">
                                 <a href="#">
@@ -112,10 +116,29 @@
                             </div>
                         </ul>
                     </div>
+                    <div class="followers" id="followersContainer">
+                        <p th:if="${#lists.isEmpty(followers)}" th:text="${user.username + ' has no followers'}" style="margin-left: 15px;"></p>
+                        <a th:href="@{'/user/' + ${follower.id}}" class="follower" th:each="follower : ${followers}">  
+                            <div class="small-profile-img">
+                                <img th:src="@{'/image/' + ${follower.profilePicture.id}}">
+                            </div>
+                            <span  th:text="${follower.username}">username</span>
+                        </a>
+
+                    </div>
+                    <div class="following" id="followingContainer">
+                        <p th:if="${#lists.isEmpty(following)}" th:text="${user.username + ' has no following users'}" style="margin-left: 15px;"></p>
+                        <a th:href="@{'/user/' + ${followingUser.id}}" class="followingUser" th:each="followingUser : ${following}">
+                            <div class="small-profile-img">
+                                <img th:src="@{'/image/' + ${followingUser.profilePicture.id}}">
+                            </div>
+                            <span th:text="${followingUser.username}">username</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
-
+    <script src="/js/accountPage.js"></script>
 </html>

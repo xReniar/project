@@ -1,0 +1,32 @@
+.followers, .following{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    align-items: start;
+}
+
+.followingUser, .follower{
+    width:48%;
+    margin:1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    font-weight: 600;
+    padding: 3px;
+    padding-right: 20px;
+}  
+
+.small-profile-img{
+    width:45px;
+    height:45px;
+    margin-right: 12px;
+}
+
+.small-profile-img > img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
