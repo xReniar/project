@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                             <div class="liked-by">
-                                <p>Liked by <b th:text="${post.likedUsers.size}">.</b> people</p>
+                                <p>Liked by <b th:text="${post.likedUsers.getSize()}">.</b> people</p>
                             </div>
                             <div class="caption">
                                 <p><b th:text="${post.author.username}">.</b> <span th:text="${post.text}">.</span></p>
