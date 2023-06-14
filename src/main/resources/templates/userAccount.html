@@ -117,22 +117,22 @@
                         </ul>
                     </div>
                     <div class="followers" id="followersContainer">
+                        <p th:if="${#lists.isEmpty(followers)}" th:text="${user.username + ' has no followers'}" style="margin-left: 15px;"></p>
                         <a th:href="@{'/user/' + ${follower.id}}" class="follower" th:each="follower : ${followers}">  
                             <div class="small-profile-img">
                                 <img th:src="@{'/image/' + ${follower.profilePicture.id}}">
                             </div>
                             <span  th:text="${follower.username}">username</span>
-                            <!-- TODO: add div for no followers-->
                         </a>
 
                     </div>
                     <div class="following" id="followingContainer">
+                        <p th:if="${#lists.isEmpty(following)}" th:text="${user.username + ' has no following users'}" style="margin-left: 15px;"></p>
                         <a th:href="@{'/user/' + ${followingUser.id}}" class="followingUser" th:each="followingUser : ${following}">
                             <div class="small-profile-img">
                                 <img th:src="@{'/image/' + ${followingUser.profilePicture.id}}">
                             </div>
                             <span th:text="${followingUser.username}">username</span>
-                            <!-- TODO: add div for no following-->
                         </a>
                     </div>
                 </div>
