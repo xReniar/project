@@ -86,15 +86,15 @@
                             </div>
                         </div>
                         <div class="liked-by">
-                            <p>Liked by <b>2323</b> people</p>
+                            <p>Liked by <b th:text="${post.likedUsers.size}">.</b> people</p>
                         </div>
                         <div class="caption">
                             <p><b th:text="${post.author.username}">.</b> <span th:text="${post.text}">.</span></p>
                         </div>
                     </div>
-                    <div class="feed">
+                    <div th:if="${comment}" class="feed">
                         <div class="comment-label">
-                            <form th:action="@{'/user/commentId'}" method="post" th:object="${comment}" class="comment-form">
+                            <form th:action="@{'/user/comment/' + ${post.id}}" method="post" th:object="${comment}" class="comment-form">
                                 <textarea required th:field="${comment.text}" type="text" placeholder="type a comment"></textarea>
                                 <div class="comment-form-btn">
                                     <button type="submit" class="btn btn-primary">Comment</button>
@@ -105,19 +105,19 @@
                 </div>
             </div>
             <div class="right">
-                <ul>
+                <ul th:each="c : ${comments}">
                     <div class="sidebar">
                         <a class="profile">
                             <div class="profile-photo">
-                                <img th:src="@{'/image/' + ${currentUser.profilePicture.id}}">
+                                <img th:src="@{'/image/' + ${c.author.profilePicture.id}}">
                             </div>
                             <div class="handle">
-                                <h4 th:text="${currentUser.name + ' ' + currentUser.surname}">NameSurname</h4>
-                                <p class="muted" th:text="${'@' + userDetails.username}">@Username</p>
+                                <h4 th:text="${c.author.name + ' ' + c.author.surname}">NameSurname</h4>
+                                <p class="muted" th:text="${'@' + c.author.username}">@Username</p>
                             </div>
                         </a>
                         <div class="account-info">
-                            <p>bello</p>
+                            <p th:text="${c.text}">textComment</p>
                         </div>
                     </div>
                 </ul>
