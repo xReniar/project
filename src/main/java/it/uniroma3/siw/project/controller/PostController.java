@@ -84,7 +84,6 @@ public class PostController {
     public String getPost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
         model.addAttribute("post", post);
-        System.out.println("###################################################" + post.getLikedUsers());
         if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
             model.addAttribute("comment", new Comment());
         model.addAttribute("comments", post.getComments());
@@ -94,10 +93,12 @@ public class PostController {
     @GetMapping("/user/post/like/{postId}")
     public String likePost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
-        post.getLikedUsers().add(this.globalController.getCurrentUser());
-        this.globalController.getCurrentUser().getLikedPosts().add(post);
-        this.userRepository.save(this.globalController.getCurrentUser());
-        this.postRepository.save(post);
+        if(!this.globalController.getCurrentUser().getLikedPosts().contains(post)){
+            post.getLikedUsers().add(this.globalController.getCurrentUser());
+            this.globalController.getCurrentUser().getLikedPosts().add(post);
+            this.userRepository.save(this.globalController.getCurrentUser());
+            this.postRepository.save(post);
+        }
         model.addAttribute("post", post);
         if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
             model.addAttribute("comment", new Comment());
@@ -108,10 +109,12 @@ public class PostController {
     @GetMapping("/user/post/unlike/{postId}")
     public String unlikePost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
-        post.getLikedUsers().remove(this.globalController.getCurrentUser());
-        this.globalController.getCurrentUser().getLikedPosts().remove(post);
-        this.userRepository.save(this.globalController.getCurrentUser());
-        this.postRepository.save(post);
+        if(this.globalController.getCurrentUser().getLikedPosts().contains(post)){
+            post.getLikedUsers().remove(this.globalController.getCurrentUser());
+            this.globalController.getCurrentUser().getLikedPosts().remove(post);
+            this.userRepository.save(this.globalController.getCurrentUser());
+            this.postRepository.save(post);
+        }
         model.addAttribute("post", post);
         if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
             model.addAttribute("comment", new Comment());
