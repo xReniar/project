@@ -95,6 +95,8 @@ public class PostController {
     public String likePost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
         post.getLikedUsers().add(this.globalController.getCurrentUser());
+        this.globalController.getCurrentUser().getLikedPosts().add(post);
+        this.userRepository.save(this.globalController.getCurrentUser());
         this.postRepository.save(post);
         model.addAttribute("post", post);
         if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
@@ -107,6 +109,8 @@ public class PostController {
     public String unlikePost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
         post.getLikedUsers().remove(this.globalController.getCurrentUser());
+        this.globalController.getCurrentUser().getLikedPosts().remove(post);
+        this.userRepository.save(this.globalController.getCurrentUser());
         this.postRepository.save(post);
         model.addAttribute("post", post);
         if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))

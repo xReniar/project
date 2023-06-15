@@ -34,6 +34,9 @@ public class User {
     @ManyToMany(mappedBy = "usersFollowing",fetch = FetchType.LAZY)
     private Set<User> usersFollowers;
 
+    @ManyToMany(mappedBy = "likedUsers",fetch = FetchType.LAZY)
+    private Set<Post> likedPosts;
+
     public Long getId() {
         return id;
     }
@@ -82,6 +85,14 @@ public class User {
         this.usersFollowers = usersFollowers;
     }
 
+    public Set<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(Set<Post> likedPosts) {
+        this.likedPosts = likedPosts;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -111,7 +122,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(posts, user.posts) && Objects.equals(usersFollowing, user.usersFollowing) && Objects.equals(usersFollowers, user.usersFollowers);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(posts, user.posts) && Objects.equals(usersFollowing, user.usersFollowing) && Objects.equals(usersFollowers, user.usersFollowers) && Objects.equals(likedPosts,user.likedPosts);
     }
 
     @Override
