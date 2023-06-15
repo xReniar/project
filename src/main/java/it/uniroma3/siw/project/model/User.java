@@ -26,6 +26,7 @@ public class User {
     private Image profilePicture;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
+    @OrderBy("id desc")
     private List<Post> posts;
 
     @ManyToMany(fetch = FetchType.LAZY)
