@@ -7,7 +7,8 @@
 </head>
 <body>
     <div th:if="${users}">
-        <a th:href="@{'/user/' + ${user.id}}" th:text="${user.username}">username</a>
+        
+        <a th:each="user : ${users}" th:href="@{'/user/' + ${user.id}}" th:text="${user.username}">username</a>
     </div>
 </body>
 </html>

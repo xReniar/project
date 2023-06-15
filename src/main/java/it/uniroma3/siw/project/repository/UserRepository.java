@@ -12,7 +12,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     public boolean existsByEmail(String email);
 
     /* CUSTOM QUERY - trova tutti gli user i cui username contengono la sottostringa */
-    @Query("SELECT u from users u where u.username LIKE '%:substring%'")
+    @Query(value = "SELECT * FROM users WHERE username LIKE %:substring%", nativeQuery = true)
     List<User> findByUsernameContainingSubstring(@Param("substring") String substring);
 
 }
