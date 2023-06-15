@@ -97,7 +97,7 @@ public class AuthenticationController {
         model.addAttribute("numPosts", currentUser.getPosts().size());
         model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
         model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
-        model.addAttribute("posts", this.postRepository.findAllByAuthorIn(this.globalController.getCurrentUser().getUsersFollowing()));
+        model.addAttribute("posts", this.postRepository.findAllByAuthorInOrderByIdDesc(this.globalController.getCurrentUser().getUsersFollowing()));
         return "index.html";
     }
 }
