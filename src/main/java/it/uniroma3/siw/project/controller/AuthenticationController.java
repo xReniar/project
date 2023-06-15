@@ -4,12 +4,14 @@ import it.uniroma3.siw.project.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.project.controller.validator.UserValidator;
 import it.uniroma3.siw.project.model.Credentials;
 import it.uniroma3.siw.project.model.Image;
+import it.uniroma3.siw.project.model.Post;
 import it.uniroma3.siw.project.model.User;
 import it.uniroma3.siw.project.repository.ImageRepository;
 import it.uniroma3.siw.project.repository.PostRepository;
 import it.uniroma3.siw.project.repository.UserRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -95,7 +97,7 @@ public class AuthenticationController {
         model.addAttribute("numPosts", currentUser.getPosts().size());
         model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
         model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
-        model.addAttribute("posts", this.postRepository.findAll());
+        model.addAttribute("posts", this.postRepository.findAllByAuthorIn(this.globalController.getCurrentUser().getUsersFollowing()));
         return "index.html";
     }
 }

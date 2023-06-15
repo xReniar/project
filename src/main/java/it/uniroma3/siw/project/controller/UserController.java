@@ -31,7 +31,6 @@ public class UserController {
         model.addAttribute("posts",user.getPosts());
         model.addAttribute("followers",user.getUsersFollowers());
         model.addAttribute("following",user.getUsersFollowing());
-
         return "personalAccount.html";
     }
 
