@@ -105,10 +105,10 @@ public class UserController {
         return "userAccount.html";
     }    
 
-    @GetMapping("/user/search/{substring}")
-    public String searchUsers(Model model, @PathVariable("substring") String substring){
+    @PostMapping("/user/search")
+    public String searchUsers(Model model, @RequestParam String search){
 
-        model.addAttribute("users", this.userRepository.findByUsernameContainingSubstring(substring));
+        model.addAttribute("users", this.userRepository.findByUsernameContainingSubstring(search));
 
         return "userSearchResult.html";
     }
