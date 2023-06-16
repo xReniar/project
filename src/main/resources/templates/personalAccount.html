@@ -22,7 +22,9 @@
             </h2>
             <div class="search-bar">
                 <i class="uil uil-search"></i>
-                <input type="search" placeholder="Search for friends">
+                <form th:action="@{'/user/search'}" method="post" id="search-bar">
+                    <input type="search" name="search" placeholder="Search for friends">
+                </form>
             </div>
             <div th:if="${userDetails}" class="nav-utilities">
                 <a href="/logout">
@@ -165,4 +167,5 @@
         });
     </script>
     <script src="/js/accountPage.js"></script>
+    <script src="/js/search.js"></script>
 </html>
