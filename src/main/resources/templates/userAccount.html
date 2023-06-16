@@ -110,6 +110,7 @@
                     </div>
 
                     <div class="posts" id="postsContainer">
+                        <div class="no-content"><p th:if="${#lists.isEmpty(posts)}" th:text="${userDetails.username + ' has no posts'}" style="margin-left: 15px;"></p></div>
                         <ul th:each="post : ${posts}">
                             <div class="post">
                                 <a th:href="@{'/user/post/' + ${post.id}}">
@@ -119,7 +120,7 @@
                         </ul>
                     </div>
                     <div class="followers" id="followersContainer">
-                        <p th:if="${#lists.isEmpty(followers)}" th:text="${user.username + ' has no followers'}" style="margin-left: 15px;"></p>
+                        <div class="no-content"><p th:if="${#lists.isEmpty(followers)}" th:text="${user.username + ' has no followers'}" style="margin-left: 15px;"></p></div>
                         <a th:href="@{'/user/' + ${follower.id}}" class="follower" th:each="follower : ${followers}">  
                             <div class="small-profile-img">
                                 <img th:src="@{'/image/' + ${follower.profilePicture.id}}">
@@ -129,7 +130,7 @@
 
                     </div>
                     <div class="following" id="followingContainer">
-                        <p th:if="${#lists.isEmpty(following)}" th:text="${user.username + ' has no following users'}" style="margin-left: 15px;"></p>
+                        <div class="no-content"><p th:if="${#lists.isEmpty(following)}" th:text="${user.username + ' has no following users'}" style="margin-left: 15px;"></p></div>
                         <a th:href="@{'/user/' + ${followingUser.id}}" class="followingUser" th:each="followingUser : ${following}">
                             <div class="small-profile-img">
                                 <img th:src="@{'/image/' + ${followingUser.profilePicture.id}}">
