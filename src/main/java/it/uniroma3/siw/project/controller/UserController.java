@@ -104,4 +104,12 @@ public class UserController {
         model.addAttribute("following",userToUnfollow.getUsersFollowing());
         return "userAccount.html";
     }    
+
+    @GetMapping("/user/search/{substring}")
+    public String searchUsers(Model model, @PathVariable("substring") String substring){
+
+        model.addAttribute("users", this.userRepository.findByUsernameContainingSubstring(substring));
+
+        return "userSearchResult.html";
+    }
 }
