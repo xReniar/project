@@ -106,6 +106,7 @@ nav .search-bar {
     background: var(--color-light);
     border-radius: var(--border-radius);
     padding: var(--search-padding);
+    display: flex;
 }
 
 nav .search-bar input[type="search"]{
