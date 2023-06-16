@@ -43,7 +43,11 @@ public class PostController {
 
     @GetMapping("/user/formNewPost")
     public String newPost(Model model){
+        User currentUser = this.globalController.getCurrentUser();
         model.addAttribute("post",new Post());
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
         return "formNewPost.html";
     }
 
