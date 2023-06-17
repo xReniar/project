@@ -5,6 +5,10 @@
     font-size: 1.03rem; 
 }
 
+.search-results {
+    margin: 1rem 0;
+}
+
 .user-card{
     max-height: 80px;
     display: flex;
