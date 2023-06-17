@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import it.uniroma3.siw.project.authentication.AuthenticationProvider;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -24,6 +26,9 @@ public class User {
 
     @OneToOne
     private Image profilePicture;
+
+    @Enumerated(EnumType.STRING)
+    private AuthenticationProvider authProvider;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
     @OrderBy("id desc")
@@ -116,6 +121,14 @@ public class User {
 
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public AuthenticationProvider getAuthProvider() {
+        return authProvider;
+    }
+
+    public void setAuthProvider(AuthenticationProvider authProvider) {
+        this.authProvider = authProvider;
     }
 
     @Override
