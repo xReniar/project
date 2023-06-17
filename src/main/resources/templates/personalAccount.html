@@ -26,12 +26,12 @@
                     <input type="search" name="search" placeholder="Search for friends">
                 </form>
             </div>
-            <div th:if="${userDetails}" class="nav-utilities">
+            <div th:if="${currentUser}" class="nav-utilities">
                 <a href="/logout">
                     <label class="btn btn-primary" for="login-logout">Logout</label>
                 </a>
             </div>
-            <div th:unless="${userDetails}">
+            <div th:unless="${currentUser}">
                 <a href="/login">
                     <label class="btn btn-primary" for="login-logout">Login</label>
                 </a>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="account-info">
                             <div>
-                                <h1 th:text="${userDetails.username}"></h1>
+                                <h1 th:text="${currentUser.username}"></h1>
                                 <a><button class="btn btn-primary" id="open-popup">Update Image</button></a>
                             </div>
                             <div class="account-analytics">
@@ -113,7 +113,7 @@
                         </ul>
                     </div>
                     <div class="followers" id="followersContainer">
-                        <p th:if="${#lists.isEmpty(followers)}" th:text="${userDetails.username + ' has no followers'}" style="margin-left: 15px;"></p>
+                        <p th:if="${#lists.isEmpty(followers)}" th:text="${currentUser.username + ' has no followers'}" style="margin-left: 15px;"></p>
                         <a th:href="@{'/user/' + ${follower.id}}" class="follower" th:each="follower : ${followers}">  
                             <div class="small-profile-img">
                                 <img th:src="@{'/image/' + ${follower.profilePicture.id}}">
@@ -123,7 +123,7 @@
 
                     </div>
                     <div class="following" id="followingContainer">
-                        <p th:if="${#lists.isEmpty(following)}" th:text="${userDetails.username + ' has no following users'}" style="margin-left: 15px;"></p>
+                        <p th:if="${#lists.isEmpty(following)}" th:text="${currentUser.username + ' has no following users'}" style="margin-left: 15px;"></p>
                         <a th:href="@{'/user/' + ${followingUser.id}}" class="followingUser" th:each="followingUser : ${following}">
                             <div class="small-profile-img">
                                 <img th:src="@{'/image/' + ${followingUser.profilePicture.id}}">
