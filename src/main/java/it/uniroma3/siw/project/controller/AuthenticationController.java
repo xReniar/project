@@ -1,5 +1,7 @@
 package it.uniroma3.siw.project.controller;
 
+import it.uniroma3.siw.project.authentication.AuthenticationProvider;
+import it.uniroma3.siw.project.authentication.CustomOAuth2User;
 import it.uniroma3.siw.project.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.project.controller.validator.UserValidator;
 import it.uniroma3.siw.project.model.Credentials;
@@ -13,6 +15,10 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,6 +59,23 @@ public class AuthenticationController {
 
     @GetMapping(value = "/")
     public String welcomePage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication instanceof AnonymousAuthenticationToken){
+            return "welcomePage.html";
+        } else {
+            if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().equals(org.springframework.security.core.userdetails.User.class)){
+                UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+                if(credentials.getRole().equals(Credentials.LOGGED_ROLE)){
+                    return this.defaultAfterLogin(model);
+                } else {
+                    return "welcomePage.html";
+                }
+            }
+            if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass().equals(CustomOAuth2User.class)){
+                return this.defaultAfterLogin(model);
+            }
+        }
         return "welcomePage.html";
     }
 
@@ -77,6 +100,7 @@ public class AuthenticationController {
             this.imageRepository.save(profilePicture);
             user.setProfilePicture(profilePicture);
             user.setUsername(credentials.getUsername());
+            user.setAuthProvider(AuthenticationProvider.LOCAL);
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             return "loginPage.html";
