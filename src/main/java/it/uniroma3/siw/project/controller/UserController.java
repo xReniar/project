@@ -14,6 +14,8 @@ import it.uniroma3.siw.project.model.User;
 import it.uniroma3.siw.project.repository.ImageRepository;
 import it.uniroma3.siw.project.repository.UserRepository;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     @Autowired
@@ -112,7 +114,10 @@ public class UserController {
         model.addAttribute("numPosts", currentUser.getPosts().size());
         model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
         model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
-        model.addAttribute("users", this.userRepository.findByUsernameContainingSubstring(search));
+        List<User> result = this.userRepository.findByUsernameContainingSubstring(search);
+        if(result.contains(currentUser))
+            result.remove(currentUser);
+        model.addAttribute("users", result);
 
         return "userSearchResult.html";
     }

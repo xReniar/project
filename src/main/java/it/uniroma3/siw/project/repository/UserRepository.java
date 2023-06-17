@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import it.uniroma3.siw.project.authentication.AuthenticationProvider;
 import it.uniroma3.siw.project.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -13,7 +14,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     public User findByEmail(String email);
 
-    public User findByNameAndSurname(String name,String surname);
+    public User findByNameAndSurnameAndAuthProvider(String name,String surname,AuthenticationProvider authenticationProvider);
 
     /* CUSTOM QUERY - trova tutti gli user i cui username contengono la sottostringa */
     @Query(value = "SELECT * FROM users WHERE UPPER(username) LIKE UPPER(CONCAT('%',:substring,'%'))", nativeQuery = true)

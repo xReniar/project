@@ -35,7 +35,7 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         if(user == null) {
             userService.createNewUserAfterOAuthLoginSuccess(email,name,surname,username,AuthenticationProvider.GOOGLE);
         } else {
-            userService.updateUserAfterOAuthLoginSuccess(user,name,surname,AuthenticationProvider.GOOGLE);  
+            //userService.updateUserAfterOAuthLoginSuccess(user,name,surname,AuthenticationProvider.LOCAL);  
         }
         super.onAuthenticationSuccess(request, response, authentication);
     }
