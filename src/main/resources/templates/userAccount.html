@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="posts" id="postsContainer">
-                        <div class="no-content"><p th:if="${#lists.isEmpty(posts)}" th:text="${userDetails.username + ' has no posts'}" style="margin-left: 15px;"></p></div>
+                        <div class="no-content"><p th:if="${#lists.isEmpty(posts)}" th:text="${user.username + ' has no posts'}" style="margin-left: 15px;"></p></div>
                         <ul th:each="post : ${posts}">
                             <div class="post">
                                 <a th:href="@{'/user/post/' + ${post.id}}">
