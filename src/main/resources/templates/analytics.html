@@ -5,11 +5,14 @@
         <meta name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>twitther - Home</title>
+        <title>twitther - Analytics</title>
         <link rel="stylesheet" href="/css/base.css">
         <link rel="stylesheet" href="/css/index.css">
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/analytics.css">
+        <!-- CHART.JS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     </head>
     <body>
         <nav>
@@ -64,46 +67,8 @@
                 </div>
                 <!--================================== MIDDLE ==================================-->
                 <div class="middle">
-                    <ul th:each="post : ${posts}" class="feeds">
-                        <div class="feed">
-                            <div class="head">
-                                <a th:href="@{'/user/' + ${post.author.id}}" class>
-                                    <div class="user">
-                                        <div class="profile-photo">
-                                            <img th:src="@{'/image/' + ${post.author.profilePicture.id}}">
-                                        </div>
-                                        <div class="info">
-                                            <h3 th:text="${post.author.username}">.</h3>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="photo" style="border: 1px solid black;">
-                                <img th:src="@{'/image/' + ${post.picture.id}}">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="like-button">
-                                    <a th:if="${#lists.contains(post.likedUsers,currentUser)}">
-                                        <span><i class="fa fa-heart" style="color:red"></i></i></span>
-                                    </a>
-                                    <a th:unless="${#lists.contains(post.likedUsers,currentUser)}">
-                                        <span><i class="uil uil-heart"></i></span>
-                                    </a>
-                                </div>
-                                <div class="comment-button">
-                                    <a th:href="@{'/user/post/' + ${post.id}}">
-                                        <span><i class="uil uil-comment-dots"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <p>Liked by <b th:text="${post.likedUsers.getSize()}">.</b> people</p>
-                            </div>
-                            <div class="caption">
-                                <p><b th:text="${post.author.username}">.</b> <span th:text="${post.text}">.</span></p>
-                            </div>
-                        </div>
-                    </ul>
+                    <canvas id="user-chart1"></canvas>
+                    <canvas id="user-chart2"></canvas>
                 </div>
                 <!--================================== RIGHT ==================================-->
                 <div class="right">
@@ -132,5 +97,66 @@
             </div>
         </main>
         <script src="/js/search.js"></script>
+        <script th:inline="javascript">
+        /*<![CDATA[*/
+            const ctx1 = document.getElementById('user-chart1');
+
+            const currentUser_username = /*[[${currentUser.username}]]*/"";
+            const currentUser_followers = /*[[${numFollowers}]]*/0;
+
+
+
+            var highestUser_username = /*[[${highestUserUsername}]]*/"";
+            var highestUser_followers = /*[[${HNumFollowers}]]*/'' || 0;
+            
+        
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                labels: [
+                    currentUser_username, highestUser_username || 'Follow someone :)'
+                ],
+                datasets: [{
+                    label: 'Number of followers',
+                    data: [currentUser_followers || 0, highestUser_followers || 0],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true,
+
+                    }
+                }
+                }
+            });
+
+
+            const ctx2 = document.getElementById('user-chart2');
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                labels: [
+                    'Followers', 'Following', 'Posts'
+                ],
+                datasets: [{
+                    label: 'Your analytics',
+                    data: [ currentUser_followers, /*[[${numFollowing}]]*/0, /*[[${numPosts}]]*/0],
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true,
+
+                    }
+                }
+                }
+            });
+            /*]]>*/
+        </script>
     </body>
 </html>

@@ -116,4 +116,26 @@ public class UserController {
 
         return "userSearchResult.html";
     }
+
+    @GetMapping("/user/analytics")
+    public String userAnalytics(Model model){
+        User currentUser = this.globalController.getCurrentUser();
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
+        User userWithMostFollowersFollowed = this.userRepository.findUserWithMostFollowers(currentUser);
+        int HNumFollowers = 0;
+        String highestUserUsername = null;
+        if(userWithMostFollowersFollowed != null){
+            HNumFollowers = userWithMostFollowersFollowed.getUsersFollowers().size();
+            highestUserUsername = userWithMostFollowersFollowed.getUsername();
+        }
+    
+
+        model.addAttribute("HNumFollowers", HNumFollowers);
+        model.addAttribute("highestUserUsername", highestUserUsername);
+        
+    
+        return "analytics.html";
+    }
 }
