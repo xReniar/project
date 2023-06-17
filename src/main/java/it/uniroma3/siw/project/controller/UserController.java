@@ -108,6 +108,10 @@ public class UserController {
     @PostMapping("/user/search")
     public String searchUsers(Model model, @RequestParam String search){
 
+        User currentUser = this.globalController.getCurrentUser();
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
         model.addAttribute("users", this.userRepository.findByUsernameContainingSubstring(search));
 
         return "userSearchResult.html";
