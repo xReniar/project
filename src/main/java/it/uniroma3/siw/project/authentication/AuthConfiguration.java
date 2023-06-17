@@ -14,7 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import it.uniroma3.siw.project.service.CustomOAuth2UserService;
+
 import static it.uniroma3.siw.project.model.Credentials.LOGGED_ROLE;
+import static it.uniroma3.siw.project.model.Credentials.OAUTH2_ROLE;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +25,12 @@ public class AuthConfiguration {
 
     @Autowired
     DataSource datasource;
+
+    @Autowired
+    CustomOAuth2UserService oAuth2UserService;
+    
+    @Autowired
+    OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -34,11 +43,13 @@ public class AuthConfiguration {
                 .authorizeHttpRequests((requests) -> {
                             try {
                                 requests
+                                        .requestMatchers(HttpMethod.GET,"/oauth2/**").permitAll()
+                                        .requestMatchers(HttpMethod.POST,"/oauth2/**").permitAll()
                                         .requestMatchers(HttpMethod.GET, "/login", "/register","/","/image/{id}",
                                                                          "/css/**", "/images/**", "favicon.ico").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                                        .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority(LOGGED_ROLE)
-                                        .requestMatchers(HttpMethod.POST,"/user/**").hasAnyAuthority(LOGGED_ROLE)
+                                        .requestMatchers(HttpMethod.GET,"/user/**").hasAnyAuthority(LOGGED_ROLE,OAUTH2_ROLE)
+                                        .requestMatchers(HttpMethod.POST,"/user/**").hasAnyAuthority(LOGGED_ROLE,OAUTH2_ROLE)
                                         .anyRequest().authenticated()
                                                 .and().exceptionHandling().accessDeniedPage("/error");
                             } catch (Exception e) {
@@ -48,15 +59,28 @@ public class AuthConfiguration {
                         // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /user/**
 
                 )
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/success")
-                        .permitAll()
+                .formLogin((form) -> {
+                    try {
+                        form
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/success")
+                                .permitAll()
+                                .and()
+                                .oauth2Login()
+                                    .loginPage("/login")
+                                    .userInfoEndpoint()
+                                    .userService(oAuth2UserService)
+                                    .and()
+                                    .successHandler(oAuth2LoginSuccessHandler);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
                 )
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll()
+                        .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

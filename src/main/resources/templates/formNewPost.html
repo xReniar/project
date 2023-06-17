@@ -21,12 +21,12 @@
                     <input type="search" name="search" placeholder="Search for friends">
                 </form>
             </div>
-            <div th:if="${userDetails}" class="nav-utilities">
+            <div th:if="${currentUser}" class="nav-utilities">
                 <a href="/logout">
                     <label class="btn btn-primary" for="login-logout">Logout</label>
                 </a>
             </div>
-            <div th:unless="${userDetails}">
+            <div th:unless="${currentUser}">
                 <a href="/login">
                     <label class="btn btn-primary" for="login-logout">Login</label>
                 </a>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="handle">
                             <h4 th:text="${currentUser.name + ' ' + currentUser.surname}">NameSurname</h4>
-                            <p class="muted" th:text="${'@' + userDetails.username}">@Username</p>
+                            <p class="muted" th:text="${'@' + currentUser.username}">@Username</p>
                         </div>
                     </a>
                     <div class="account-info">

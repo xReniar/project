@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 public class Credentials {
 
     public static final String LOGGED_ROLE = "AUTHENTICATED";
+    public static final String OAUTH2_ROLE = "OAUTH2_USER";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,6 +59,4 @@ public class Credentials {
     public void setUsername(String username) {
         this.username = username;
     }
-
-
 }
