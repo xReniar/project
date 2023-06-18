@@ -6,7 +6,10 @@ import it.uniroma3.siw.project.model.User;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
 import it.uniroma3.siw.project.model.Post;
 
 public interface PostRepository extends CrudRepository<Post,Long> {
@@ -22,4 +25,7 @@ public interface PostRepository extends CrudRepository<Post,Long> {
     }
 
     public List<Post> findAllByAuthorInOrderByIdDesc(Set<User> following);
+
+    @Query("SELECT p FROM Post p WHERE p.author <> :currentUser")
+    List<Post> findAllPostsExceptCurrentUser(@Param("currentUser") User currentUser);
 }
