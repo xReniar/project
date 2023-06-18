@@ -5,10 +5,9 @@
         <meta name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>twitther - Search Results</title>
+        <title>twitther - Home</title>
         <link rel="stylesheet" href="/css/base.css">
         <link rel="stylesheet" href="/css/index.css">
-        <link rel="stylesheet" href="/css/search.css">
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -64,20 +63,47 @@
                     </a>
                 </div>
                 <!--================================== MIDDLE ==================================-->
-                <div class="middle search-results">
-                    
-                    <div th:if="${#lists.isEmpty(users)}" class="no-results">No users found</div>
-
-                    <a class="user-card" th:each="user : ${users}" th:href="@{'/user/' + ${user.id}}">
-                        <div class="pic">
-                            <img th:src="@{'/image/' + ${user.profilePicture.id}}">
+                <div class="middle">
+                    <ul th:each="post : ${posts}" class="feeds">
+                        <div class="feed">
+                            <div class="head">
+                                <a th:href="@{'/user/' + ${post.author.id}}" class>
+                                    <div class="user">
+                                        <div class="profile-photo">
+                                            <img th:src="@{'/image/' + ${post.author.profilePicture.id}}">
+                                        </div>
+                                        <div class="info">
+                                            <h3 th:text="${post.author.username}">.</h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="photo" style="border: 1px solid black;">
+                                <img th:src="@{'/image/' + ${post.picture.id}}">
+                            </div>
+                            <div class="action-buttons">
+                                <div class="like-button">
+                                    <a th:if="${#lists.contains(post.likedUsers,currentUser)}">
+                                        <span><i class="fa fa-heart" style="color:red"></i></i></span>
+                                    </a>
+                                    <a th:unless="${#lists.contains(post.likedUsers,currentUser)}">
+                                        <span><i class="uil uil-heart"></i></span>
+                                    </a>
+                                </div>
+                                <div class="comment-button">
+                                    <a th:href="@{'/user/post/' + ${post.id}}">
+                                        <span><i class="uil uil-comment-dots"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="liked-by">
+                                <p>Liked by <b th:text="${post.likedUsers.getSize()}">.</b> people</p>
+                            </div>
+                            <div class="caption">
+                                <p><b th:text="${post.author.username}">.</b> <span th:text="${post.text}">.</span></p>
+                            </div>
                         </div>
-                        <div class="info">
-                            <h4 th:text="${user.name + ' ' + user.surname}">NameSurname</h4>
-                            <p class="muted" th:text="${'@' + user.username}">@Username</p>
-                        </div>
-                    </a>
-                    
+                    </ul>
                 </div>
                 <!--================================== RIGHT ==================================-->
                 <div class="right">
@@ -97,11 +123,11 @@
                             <p><b th:text="${numFollowing}"></b></span> following</p>
                         </div>
                     </div>
-                    <!--<div class="sidebar">
+                    <div class="sidebar">
                         <div class="lucky-followers">
-                            
+                            ciao
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </main>

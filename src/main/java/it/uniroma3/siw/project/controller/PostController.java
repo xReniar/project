@@ -125,4 +125,17 @@ public class PostController {
         model.addAttribute("comments", post.getComments());
         return "post.html";
     }
+
+    @GetMapping("/user/explore")
+    public String explore(Model model){
+
+        User currentUser = this.globalController.getCurrentUser();
+        model.addAttribute("posts", this.postRepository.findAllPostsExceptCurrentUser(currentUser));
+        model.addAttribute("numPosts", currentUser.getPosts().size());
+        model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
+        model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
+
+
+        return "explore.html";
+    }
 }
