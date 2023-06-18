@@ -88,8 +88,13 @@ public class PostController {
     public String getPost(Model model,@PathVariable("postId") Long id){
         Post post = this.postRepository.findById(id).get();
         model.addAttribute("post", post);
-        if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
+        /*
+         * if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
             model.addAttribute("comment", new Comment());
+         */
+        if(!this.postRepository.postHasCommentFromUser(post, this.globalController.getCurrentUser())){
+            model.addAttribute("comment", new Comment());
+        }
         model.addAttribute("comments", post.getComments());
         return "post.html";
     }
@@ -104,8 +109,9 @@ public class PostController {
             this.postRepository.save(post);
         }
         model.addAttribute("post", post);
-        if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
+        if(!this.postRepository.postHasCommentFromUser(post, this.globalController.getCurrentUser())){
             model.addAttribute("comment", new Comment());
+        }
         model.addAttribute("comments", post.getComments());
         return "post.html";
     }
@@ -120,8 +126,9 @@ public class PostController {
             this.postRepository.save(post);
         }
         model.addAttribute("post", post);
-        if(!this.postRepository.hasCommentWithAuthor(post, this.globalController.getCurrentUser()))
+        if(!this.postRepository.postHasCommentFromUser(post, this.globalController.getCurrentUser())){
             model.addAttribute("comment", new Comment());
+        }
         model.addAttribute("comments", post.getComments());
         return "post.html";
     }
