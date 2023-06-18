@@ -1,14 +1,5 @@
-{PROJECT NAME}
+Twitther
 =======
-*    description
-
-Dependencies
-=============
-* Spring Web
-* Spring Data JPA
-* Postgresql Driver
-* Thymeleaf
-* Validation
 
 Casi d'uso
 =============
