@@ -31,7 +31,7 @@ public class CommentController {
         Post post = this.postRepository.findById(postId).get();
         comment.setAuthor(this.globalController.getCurrentUser());
         model.addAttribute("comment", new Comment());
-        if(!this.postRepository.hasCommentWithAuthor(post,this.globalController.getCurrentUser())){
+        if(!this.postRepository.postHasCommentFromUser(post, this.globalController.getCurrentUser())){
             post.getComments().add(comment);
             this.commentRepository.save(comment);
             this.postRepository.save(post);
