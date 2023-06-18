@@ -15,7 +15,17 @@
     width: 100%;
 }
 
+#display_image {
+    width: 100%;
+    height: 600px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+    object-fit: contain;
+}
+
 .image-form {
+    /*
     display: flex;
     width: 100%;
     height: 400px;
@@ -23,6 +33,7 @@
     justify-content: center;
     background: var(--color-gray);
     border-radius: 30px;
+    */
 }
 
 .text-form {

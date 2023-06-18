@@ -62,9 +62,8 @@
             </div>
             <div class="post">
                 <form th:action="@{/user/uploadPost}" th:object="${post}" method="post" enctype="multipart/form-data" class="form">
-                    <div class="image-form">
-                        <input required type="file" name="file">
-                    </div>
+                    <input required type="file" name="file" id="image_input">
+                    <div id="display_image" class="image-form"></div>
                     <div class="text-form">
                         <input required type="text" autocomplete="off" th:field="${post.text}" placeholder="Write a caption...">
                     </div>
@@ -99,5 +98,17 @@
         </div>
     </main>
     <script src="/js/search.js"></script>
+    <script>
+        const image_input = document.querySelector("#image_input")
+        var uploaded_image = "";
+        image_input.addEventListener("change", function() {
+            const reader = new FileReader();
+            reader.addEventListener("load",() => {
+                uploaded_image = reader.result;
+                document.querySelector("#display_image").style.backgroundImage = `url(${uploaded_image})`
+            });
+            reader.readAsDataURL(this.files[0]);
+        })
+    </script>
 </body>
 </html>
