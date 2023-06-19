@@ -21,6 +21,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findByUsernameContainingSubstring(String substring);
 
     @Query("SELECT uf FROM User u JOIN u.usersFollowing uf WHERE u = :currentUser ORDER BY SIZE(uf.usersFollowers) DESC")
-    User findUserWithMostFollowers(@Param("currentUser") User currentUser);
+    List<User> findUserWithMostFollowers(@Param("currentUser") User currentUser);
 
 }

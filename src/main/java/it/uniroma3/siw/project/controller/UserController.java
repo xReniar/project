@@ -128,7 +128,7 @@ public class UserController {
         model.addAttribute("numPosts", currentUser.getPosts().size());
         model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
         model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
-        User userWithMostFollowersFollowed = this.userRepository.findUserWithMostFollowers(currentUser);
+        User userWithMostFollowersFollowed = this.userRepository.findUserWithMostFollowers(currentUser).get(0);
         int HNumFollowers = 0;
         String highestUserUsername = null;
         if(userWithMostFollowersFollowed != null){
