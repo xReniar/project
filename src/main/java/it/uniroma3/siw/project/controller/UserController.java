@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
+
     @Autowired
     UserRepository userRepository;
 
@@ -128,19 +129,22 @@ public class UserController {
         model.addAttribute("numPosts", currentUser.getPosts().size());
         model.addAttribute("numFollowers", currentUser.getUsersFollowers().size());
         model.addAttribute("numFollowing", currentUser.getUsersFollowing().size());
-        User userWithMostFollowersFollowed = this.userRepository.findUserWithMostFollowers(currentUser).get(0);
+
+        User userWithMostFollowersFollowed = null; // todo check
+        List<User> userWithMostFollowers = this.userRepository.findUserWithMostFollowers(currentUser);
+        if(userWithMostFollowers != null && !userWithMostFollowers.isEmpty()){
+            userWithMostFollowersFollowed = userWithMostFollowers.get(0);
+        }
         int HNumFollowers = 0;
         String highestUserUsername = null;
         if(userWithMostFollowersFollowed != null){
             HNumFollowers = userWithMostFollowersFollowed.getUsersFollowers().size();
             highestUserUsername = userWithMostFollowersFollowed.getUsername();
         }
-    
 
         model.addAttribute("HNumFollowers", HNumFollowers);
         model.addAttribute("highestUserUsername", highestUserUsername);
-        
-    
+
         return "analytics.html";
     }
 }
